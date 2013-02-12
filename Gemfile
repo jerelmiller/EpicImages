@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.12'
 gem 'haml'
 
 # Bundle edge Rails instead:
@@ -10,7 +10,7 @@ group :development do
   gem 'sqlite3'
 end
 
-group :production do
+group :staging do
   gem 'pg'
 end
 
