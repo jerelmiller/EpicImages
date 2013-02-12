@@ -8,6 +8,8 @@ gem 'haml'
 
 group :development do
   gem 'sqlite3'
+  gem 'thin'
+  gem 'pry-rails'
 end
 
 group :staging do
