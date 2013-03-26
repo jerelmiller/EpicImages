@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
 gem 'haml'
+gem 'sorcery'
+gem 'paperclip'
+gem 'rmagick'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
