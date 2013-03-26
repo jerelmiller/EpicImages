@@ -1,7 +1,17 @@
 EpicImages::Application.routes.draw do
   root to: 'home#index'
 
+  get 'login' => 'sessions#new'
+  get 'logout' => 'sessions#destroy'
+  resources :sessions, only: :create
+
   get '/about_us', to: 'home#about_us'
   get '/gallery', to: 'home#gallery'
   get '/contact_us', to: 'home#contact_us'
+
+  namespace :admin do
+    # resource :users, only: [:edit, :update]
+    root :to => 'admin#index'
+  end
+
 end
