@@ -1,0 +1,19 @@
+= form_for [:admin, current_user], url: admin_users_path do |f|
+  = render 'layouts/flash', flash: flash
+  .input
+    %label Email
+    = f.text_field :email
+  .input
+    %label First Name
+    = f.text_field :first_name
+  .input
+    %label Last Name
+    = f.text_field :last_name
+  .input
+    %label Password
+    = f.password_field :password
+  .input
+    %label.passConfirm Password Confirmation
+    = f.password_field :password_confirmation
+  .submit
+    = f.submit 'Update', class: 'btn btn-primary btn-large'

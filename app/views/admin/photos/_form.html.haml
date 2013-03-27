@@ -1,0 +1,10 @@
+= form_for [:admin, @photo], html: { multipart: true } do |f|
+  = render 'layouts/flash', flash: flash
+  .input
+    %label Choose Photo
+    = f.file_field :image
+  .input
+    %label Title
+    = f.text_field :title
+  .submit
+    = f.submit

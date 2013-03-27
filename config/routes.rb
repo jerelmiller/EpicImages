@@ -10,7 +10,9 @@ EpicImages::Application.routes.draw do
   get '/contact_us', to: 'home#contact_us'
 
   namespace :admin do
-    # resource :users, only: [:edit, :update]
+    resource :users, only: [:edit, :update]
+    resources :photos
+    resources :blogs
     root :to => 'admin#index'
   end
 
