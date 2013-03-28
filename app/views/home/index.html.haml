@@ -1,1 +1,2 @@
-= image_tag 'http://myepicimages.com/wp-content/uploads/p4/images/masthead_image1_1342630462.png'
+/ = image_tag 'http://myepicimages.com/wp-content/uploads/p4/images/masthead_image1_1342630462.png'
+= image_tag Photo.find(rand(8) + 1).image.url(:large)
