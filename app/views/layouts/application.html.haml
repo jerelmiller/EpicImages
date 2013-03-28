@@ -6,5 +6,10 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    = render 'layouts/menu'
-    = yield
+    / = render 'layouts/menu'
+    .menu
+      = image_tag 'logo.jpg'
+      This is where the menu goes
+
+    .pinterest
+      = yield

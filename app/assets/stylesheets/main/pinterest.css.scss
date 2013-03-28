@@ -1,0 +1,21 @@
+.pinterest {
+  padding: 10px;
+}
+
+// .photo {
+//   float: left;
+//   margin: 5px;
+
+//   img {
+//     width: 200px;
+//     height: auto;
+//   }
+// }
+
+img.photo {
+  // width: 200px;
+  min-width: 200px;
+  float: left;
+  margin: 5px;
+  height: auto;
+}
