@@ -1,0 +1,9 @@
+%header
+  %nav.menu.clearfix
+    = link_to root_path, class: 'clearfix' do
+      .logo.left
+    %ul.right
+      %li= link_to 'HOME', root_path
+      %li= link_to 'ABOUT US', about_us_path
+      %li= link_to 'GALLERY', gallery_path
+      %li= link_to 'CONTACT', contact_us_path

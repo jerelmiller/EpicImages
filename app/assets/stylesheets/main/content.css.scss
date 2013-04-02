@@ -1,0 +1,10 @@
+@import 'shared/mixins';
+
+.content {
+  width: 1000px;
+  margin: 20px auto 0;
+  padding: 20px;
+  background: #FFF;
+  @include border-radius(2px);
+  @include box-shadow(0, 0, 9px, null, rgba(0, 0, 0, 0.1));
+}

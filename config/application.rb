@@ -55,6 +55,7 @@ module EpicImages
 
     # Enable the asset pipeline
     config.assets.enabled = true
+    config.assets.paths << "#{Rails.root}/app/assets/fonts"
 
     # Don't bootstrap application assets
     config.assets.initialize_on_precompile = false
