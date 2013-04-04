@@ -1,0 +1,9 @@
+#photoCarousel.carousel.slide
+  - unless @photos.empty?
+    .carousel-inner
+      - @photos.each_with_index do |photo, index|
+        .item{ class: index.eql?(0) ? 'active' : '' }
+          = image_tag photo.image.url(:regular), alt: photo.title
+
+    = link_to '&lsaquo;'.html_safe, '#photoCarousel', class: 'carousel-control left', 'data-slide' => 'prev'
+    = link_to '&rsaquo;'.html_safe, '#photoCarousel', class: 'carousel-control right', 'data-slide' => 'next'
