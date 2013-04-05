@@ -6,7 +6,7 @@ class Photo < ActiveRecord::Base
     path: ':rails_root/public/system/:class/:id/:style/:filename',
     url: '/system/:class/:id/:style/:filename',
     styles: {
-      thumb: '200x200>',
-      regular: '500x500>'
+      thumb: '300x200#',
+      regular_cropped: '750x500#'
     }
 end

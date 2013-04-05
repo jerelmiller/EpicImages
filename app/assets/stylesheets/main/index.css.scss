@@ -1,0 +1,47 @@
+#photoCarousel {
+  margin-bottom: 20px;
+}
+
+.grid {
+  width: 917px;
+  display: block;
+  margin: 0 auto;
+  .item {
+    width: 218px;
+    margin-left: 15px;
+    float: left;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:hover {
+      .itemTitle {
+        background: #333;
+      }
+      img {
+        opacity: 0.8;
+      }
+    }
+  }
+  .itemTitle {
+    margin-top: 5px;
+    padding: 13px 10px;
+    color: white;
+    background: #222;
+    font-size: 18px;
+    line-height: 18px;
+  }
+}
+
+.intro {
+  margin-top: 20px;
+
+}
+
+.welcome {
+  font-size: 24px;
+  line-height: 24px;
+}
+
+p {
+  font-size: 14px;
+}
