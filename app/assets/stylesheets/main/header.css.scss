@@ -1,3 +1,5 @@
+@import 'shared/colors';
+
 header {
   margin-bottom: 20px;
 }
@@ -12,7 +14,7 @@ nav {
   }
   ul {
     list-style-type: none;
-    margin-top: 50px;
+    margin-top: 45px;
     li {
       display: inline;
     }
@@ -20,7 +22,15 @@ nav {
     a {
       display: block;
       float: left;
-      padding: 5px 15px;
+      padding: 10px 15px;
+      color: $textGray;
+      &:visited {
+        color: $textGray;
+      }
+      &:hover {
+        background: #888;
+        color: white;
+      }
     }
   }
 }
