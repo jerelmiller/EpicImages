@@ -7,6 +7,6 @@ class Photo < ActiveRecord::Base
     url: '/system/:class/:id/:style/:filename',
     styles: {
       thumb: '300x200#',
-      regular_cropped: '750x500#'
+      cropped: '750x500#'
     }
 end

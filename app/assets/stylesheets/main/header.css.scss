@@ -2,19 +2,22 @@
 
 header {
   margin-bottom: 20px;
+  padding: 20px;
+  background: $blue;
 }
 
 nav {
   width: 100%;
   font-size: 16px;
+  height: 67px;
   .logo {
-    background: url('logo.png') no-repeat;
-    height: 90px;
+    background: url('logo.png') 0 -15px no-repeat;
+    height: 71px;
     width: 300px;
   }
   ul {
     list-style-type: none;
-    margin-top: 45px;
+    margin-top: 33px;
     li {
       display: inline;
     }
@@ -23,13 +26,12 @@ nav {
       display: block;
       float: left;
       padding: 10px 15px;
-      color: $textGray;
+      color: $silver;
       &:visited {
-        color: $textGray;
+        color: $silver;
       }
       &:hover {
-        background: #888;
-        color: white;
+        background: $lightGreen;
       }
     }
   }

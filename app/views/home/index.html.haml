@@ -1,34 +1,39 @@
-#photoCarousel.carousel.slide
+%section#photoCarousel.carousel.slide
   - unless @photos.empty?
     .carousel-inner
       - @photos.each_with_index do |photo, index|
         .item{ class: index.eql?(0) ? 'active' : '' }
-          = image_tag photo.image.url(:regular_cropped), alt: photo.title
+          = image_tag photo.image.url(:cropped), alt: photo.title
 
     = link_to '&lsaquo;'.html_safe, '#photoCarousel', class: 'carousel-control left', 'data-slide' => 'prev'
     = link_to '&rsaquo;'.html_safe, '#photoCarousel', class: 'carousel-control right', 'data-slide' => 'next'
 
-.grid.clearfix
-  = link_to gallery_path, class: 'item' do
-    = image_tag 'galleries.jpg'
-    .itemTitle Gallery
-  = link_to '#', class: 'item' do
-    = image_tag 'testimonials.jpg'
-    .itemTitle Specials
-  = link_to '#', class: 'item' do
-    = image_tag 'services.jpg'
-    .itemTitle Benefits
-  = link_to about_us_path, class: 'item' do
-    = image_tag 'about.jpg'
-    .itemTitle About Us
+  .grid.clearfix
+    = link_to gallery_path, class: 'item' do
+      = image_tag 'galleries.jpg'
+      .itemTitle Gallery
+    = link_to '#', class: 'item' do
+      = image_tag 'testimonials.jpg'
+      .itemTitle Specials
+    = link_to '#', class: 'item' do
+      = image_tag 'services.jpg'
+      .itemTitle Benefits
+    = link_to about_us_path, class: 'item' do
+      = image_tag 'about.jpg'
+      .itemTitle About Us
 
-.intro
-  .welcome WELCOME TO EPIC IMAGES
-  %p
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac nisl non diam fringilla pharetra non venenatis tortor.
-    Sed consectetur ligula nec arcu dictum condimentum. Integer non turpis nisl. Curabitur ac augue lacus, ut imperdiet eros.
-    Curabitur a tincidunt eros. Nulla lobortis accumsan ipsum. Phasellus blandit fermentum consequat. Donec egestas ultrices
-    nulla adipiscing facilisis. Cras mollis, neque nec bibendum interdum, urna neque sodales ante, et interdum ligula eros non sem.
-    Cras facilisis blandit ante id pretium. Mauris posuere ultricies rhoncus. Vestibulum varius sagittis imperdiet. Fusce molestie ornare
-    lectus eu molestie. Sed vitae mollis tortor. Ut sed ante ut augue tempus semper. Vestibulum volutpat, lacus vitae dictum pharetra,
-    velit dui ullamcorper justo, vel posuere felis nulla eget odio.
+/ .intro
+/   .welcome WELCOME TO EPIC IMAGES
+/   %p
+/     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac nisl non diam fringilla pharetra non venenatis tortor.
+/     Sed consectetur ligula nec arcu dictum condimentum. Integer non turpis nisl. Curabitur ac augue lacus, ut imperdiet eros.
+/     Curabitur a tincidunt eros. Nulla lobortis accumsan ipsum. Phasellus blandit fermentum consequat. Donec egestas ultrices
+/     nulla adipiscing facilisis. Cras mollis, neque nec bibendum interdum, urna neque sodales ante, et interdum ligula eros non sem.
+/     Cras facilisis blandit ante id pretium. Mauris posuere ultricies rhoncus. Vestibulum varius sagittis imperdiet. Fusce molestie ornare
+/     lectus eu molestie. Sed vitae mollis tortor. Ut sed ante ut augue tempus semper. Vestibulum volutpat, lacus vitae dictum pharetra,
+/     velit dui ullamcorper justo, vel posuere felis nulla eget odio.
+
+%section.blogs
+  / %h2.sectionTitle RECENT BLOGS
+  %h3= @blog.title
+  %p= simple_format truncate(@blog.body, length: 300)

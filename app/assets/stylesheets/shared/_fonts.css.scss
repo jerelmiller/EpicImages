@@ -1,12 +1,12 @@
-$nexa_path: url(font_url('nexa_light.woff')),
-            url(font_url('nexa_light.ttf')),
-            url(font_url('nexa_light.eot')),
-            url(font_url('nexa_light.svg'));
+$nexa_path: url('nexa_light.woff'),
+            url('nexa_light.ttf'),
+            url('nexa_light.eot'),
+            url('nexa_light.svg');
 
-$nexa_bold_path: url(font_url('nexa_bold.woff')),
-                 url(font_url('nexa_bold.ttf')),
-                 url(font_url('nexa_bold.eot')),
-                 url(font_url('nexa_bold.svg'));
+$nexa_bold_path: url('nexa_bold.woff'),
+                 url('nexa_bold.ttf'),
+                 url('nexa_bold.eot'),
+                 url('nexa_bold.svg');
 
 @font-face {
   font: {

@@ -1,10 +1,26 @@
 @import 'shared/mixins';
+@import 'shared/colors';
 
 .content {
-  width: 920px;
+  width: 960px;
   margin: 20px auto;
+  // background: #FFF;
+  // @include border-radius(2px);
+  // @include box-shadow(0, 0, 9px, null, rgba(0, 0, 0, 0.1));
+}
+
+.container {
+  // padding: 20px;
+}
+
+section {
   padding: 20px;
-  background: #FFF;
+  background: white;
   @include border-radius(2px);
   @include box-shadow(0, 0, 9px, null, rgba(0, 0, 0, 0.1));
+  margin-top: 20px;
+}
+
+.sectionTitle {
+  border-top: 1px solid $lightGreen;
 }

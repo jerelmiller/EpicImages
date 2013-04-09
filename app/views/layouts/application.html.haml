@@ -8,6 +8,7 @@
   %body
     .content
       = render 'layouts/header'
-      = yield
-      %footer
-        .copyright &copy; Copyright 2013 Epic Images
+      .container
+        = yield
+        %footer
+          .copyright &copy; Copyright 2013 Epic Images

@@ -1,3 +1,5 @@
+@import 'shared/colors';
+
 #photoCarousel {
   margin-bottom: 20px;
 }
@@ -6,6 +8,7 @@
   width: 917px;
   display: block;
   margin: 0 auto;
+  margin-top: 20px;
   .item {
     width: 218px;
     margin-left: 15px;
@@ -15,7 +18,7 @@
     }
     &:hover {
       .itemTitle {
-        background: #333;
+        background: $darkBlue;
       }
       img {
         opacity: 0.8;
@@ -25,8 +28,8 @@
   .itemTitle {
     margin-top: 5px;
     padding: 13px 10px;
-    color: white;
-    background: #222;
+    color: $silver;
+    background: $blue;
     font-size: 18px;
     line-height: 18px;
   }
@@ -44,4 +47,11 @@
 
 p {
   font-size: 14px;
+}
+
+.blogs {
+  margin-top: 20px;
+  title {
+    font-size: 20px;
+  }
 }
