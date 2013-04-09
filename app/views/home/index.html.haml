@@ -1,12 +1,13 @@
-%section#photoCarousel.carousel.slide
-  - unless @photos.empty?
-    .carousel-inner
-      - @photos.each_with_index do |photo, index|
-        .item{ class: index.eql?(0) ? 'active' : '' }
-          = image_tag photo.image.url(:cropped), alt: photo.title
+%section
+  #photoCarousel.carousel.slide
+    - unless @photos.empty?
+      .carousel-inner
+        - @photos.each_with_index do |photo, index|
+          .item{ class: index.eql?(0) ? 'active' : '' }
+            = image_tag photo.image.url(:cropped), alt: photo.title
 
-    = link_to '&lsaquo;'.html_safe, '#photoCarousel', class: 'carousel-control left', 'data-slide' => 'prev'
-    = link_to '&rsaquo;'.html_safe, '#photoCarousel', class: 'carousel-control right', 'data-slide' => 'next'
+      = link_to '&lsaquo;'.html_safe, '#photoCarousel', class: 'carousel-control left', 'data-slide' => 'prev'
+      = link_to '&rsaquo;'.html_safe, '#photoCarousel', class: 'carousel-control right', 'data-slide' => 'next'
 
   .grid.clearfix
     = link_to gallery_path, class: 'item' do
@@ -33,7 +34,13 @@
 /     lectus eu molestie. Sed vitae mollis tortor. Ut sed ante ut augue tempus semper. Vestibulum volutpat, lacus vitae dictum pharetra,
 /     velit dui ullamcorper justo, vel posuere felis nulla eget odio.
 
-%section.blogs
-  / %h2.sectionTitle RECENT BLOGS
-  %h3= @blog.title
-  %p= simple_format truncate(@blog.body, length: 300)
+- if @blog
+  %section.blogs
+    %h2.sectionTitle= link_to 'BLOG &rarr;'.html_safe, blogs_path
+    %h3= link_to @blog.title, blog_path(@blog)
+    %p
+      = truncate(@blog.body, length: 385)
+      - if @blog.body.length > 385
+        %strong= link_to 'Continue Reading &Rarr;'.html_safe, blog_path(@blog)
+
+    %h3.readMore= link_to 'Read More &rarr;'.html_safe, blogs_path

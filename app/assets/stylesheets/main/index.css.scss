@@ -1,9 +1,5 @@
 @import 'shared/colors';
 
-#photoCarousel {
-  margin-bottom: 20px;
-}
-
 .grid {
   width: 917px;
   display: block;
@@ -47,6 +43,9 @@
 
 p {
   font-size: 14px;
+  strong {
+    font-size: 1.1em;
+  }
 }
 
 .blogs {
@@ -54,4 +53,8 @@ p {
   title {
     font-size: 20px;
   }
+}
+
+.readMore {
+  margin-top: 40px;
 }
