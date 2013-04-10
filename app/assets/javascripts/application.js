@@ -13,4 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require select2
+//= require underscore
+//= require backbone
+//= require backbone/epic_images
 //= require_tree .

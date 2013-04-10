@@ -3,4 +3,5 @@
  *= require bootstrap_and_overrides
  *= require_tree ./main
  *= require_tree ./shared
+ *= require select2
  */

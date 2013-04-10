@@ -4,13 +4,6 @@
 .content {
   width: 960px;
   margin: 20px auto;
-  // background: #FFF;
-  // @include border-radius(2px);
-  // @include box-shadow(0, 0, 9px, null, rgba(0, 0, 0, 0.1));
-}
-
-.container {
-  // padding: 20px;
 }
 
 section {
@@ -27,6 +20,14 @@ section {
       @include transition(color, 0.08s);
       color: $lightGreen;
     }
+  }
+
+  &.attention {
+    background: $red;
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 40px;
+    color: white;
   }
 }
 
