@@ -1,6 +1,6 @@
 class Photo < ActiveRecord::Base
 
-  attr_accessible :title, :image
+  attr_accessible :title, :image, :featured_flag
 
   has_attached_file :image,
     storage: :dropbox,
@@ -10,4 +10,8 @@ class Photo < ActiveRecord::Base
 
     validates_attachment :image, presence: { message: 'must be present' },
       content_type: { content_type: ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'] }
+
+  def self.featured
+    where(featured_flag: true)
+  end
 end

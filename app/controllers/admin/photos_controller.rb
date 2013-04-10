@@ -22,4 +22,16 @@ class Admin::PhotosController < Admin::AdminController
   def edit
     @photo = Photo.find(params[:id])
   end
+
+  def update
+    @photo = Photo.find(params[:id])
+
+    if @photo.update_attributes(params[:photo])
+      flash[:success] = "The photo has been successfully updated"
+      redirect_to admin_photos_path
+    else
+      flash[:error] = @photo.errors.full_messages.join('<br/>')
+      redirect_to edit_admin_photos_path(@photo)
+    end
+  end
 end
