@@ -13,10 +13,10 @@ class EpicImages.Views.TagSelection extends Backbone.View
     @updateView()
 
   updateView: =>
-    tags = @collection.map @wrapTag
-    tags = @options.photoTags.map @wrapTag if @options.photoTags
-    @$('input#tags').select2 'data', tags
-    @
+    if @options.photoTags
+      tags = @options.photoTags.map @wrapTag
+      @$('input#tags').select2 'data', tags
+      @
 
   createSearchChoice: (term) =>
     @wrapTag(new Analyze.Models.Tag(name: $.trim(term)))
