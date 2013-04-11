@@ -1,0 +1,4 @@
+json.(tag,
+  :id,
+  :name
+)

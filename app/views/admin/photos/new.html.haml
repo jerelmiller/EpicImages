@@ -1,1 +1,13 @@
 = render 'form'
+
+:javascript
+  var tags = new EpicImages.Collections.Tags(
+    #{render(partial: 'tags/tags', locals: { tags: @tags }, formats: [:json])}
+  );
+
+  var tagSelectionView = new EpicImages.Views.TagSelection({
+    el: '#tagsInput',
+    collection: tags
+  });
+
+  tagSelectionView.render();
