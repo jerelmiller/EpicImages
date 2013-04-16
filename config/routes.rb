@@ -6,14 +6,15 @@ EpicImages::Application.routes.draw do
   resources :sessions, only: :create
 
   get '/about_us', to: 'home#about_us'
-  get '/gallery', to: 'home#gallery'
   get '/contact_us', to: 'home#contact_us'
   resources :blogs, only: [:index, :show]
+  resources :galleries, path: 'gallery', only: [:index, :show]
 
   namespace :admin do
     resource :users, only: [:edit, :update]
     resources :photos
     resources :blogs
+    resources :galleries
     root :to => 'admin#index'
   end
 

@@ -1,0 +1,10 @@
+.galleries {
+  .galleryItem {
+    width: 300px;
+    margin: 0 0 10px 10px;
+    float: left;
+  }
+  .galleryItem:nth-child(3n + 1) {
+    margin-left: 0;
+  }
+}

@@ -33,6 +33,10 @@ ul, ol {
   font-weight: bold;
 }
 
+.clear {
+  clear: both;
+}
+
 .clearfix:after {
   content: ".";
   display: block;
