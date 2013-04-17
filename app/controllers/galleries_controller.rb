@@ -5,7 +5,7 @@ class GalleriesController < ApplicationController
   end
 
   def show
-    @gallery = Gallery.where(name: filtered_id).first
+    @gallery = Gallery.where('LOWER(name) = ?', filtered_id).first
   end
 
   private
