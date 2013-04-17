@@ -1,3 +1,5 @@
+@import 'shared/colors';
+
 .galleries {
   .galleryItem {
     width: 300px;
@@ -7,4 +9,21 @@
   .galleryItem:nth-child(3n + 1) {
     margin-left: 0;
   }
+}
+
+.imageWrapper {
+  height: 200px;
+  width: 300px;
+  overflow: hidden;
+  position: relative;
+}
+
+.caption {
+  position: relative;
+  text-align: center;
+  padding: 20px;
+  background: $blue;
+  color: white;
+  font-size: 1.3em;
+  opacity: .7;
 }

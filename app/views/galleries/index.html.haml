@@ -1,3 +1,13 @@
 %section.galleries
-  = render @galleries
-  .clear
+
+:javascript
+  var galleries = new EpicImages.Collections.Galleries(
+    #{render(partial: 'galleries', locals: { galleries: @galleries }, formats: [:json])}
+  );
+
+  var galleriesView = new EpicImages.Views.Galleries({
+      el: '.galleries',
+      collection: galleries
+  });
+
+  galleriesView.render();
