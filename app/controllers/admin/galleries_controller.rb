@@ -13,14 +13,17 @@ class Admin::GalleriesController < Admin::AdminController
   end
 
   def create
-    @gallery = Gallery.new(params[:gallery])
+    ActiveRecord::Base.transaction do
+      @gallery = Gallery.new(params[:gallery])
 
-    if @gallery.save
-      flash[:success] = 'You have successfully created a new gallery'
-    else
-      flash[:error] = @gallery.errors.full_messages.join('<br/>')
+      if @gallery.save
+        create_tag
+        flash[:success] = 'You have successfully created a new gallery'
+      else
+        flash[:error] = @gallery.errors.full_messages.join('<br/>')
+      end
+      redirect_to request.referer
     end
-    redirect_to request.referer
   end
 
   def destroy
@@ -30,4 +33,11 @@ class Admin::GalleriesController < Admin::AdminController
     flash[:success] = "Gallery successfully destroyed"
     redirect_to request.referer
   end
+
+  private
+
+    def create_tag
+      @tag = Tag.where(name: @gallery.name).first_or_initialize
+      @tag.save if @tag.new_record?
+    end
 end

@@ -2,10 +2,12 @@ class GalleriesController < ApplicationController
 
   def index
     @galleries = Gallery.all
+    @tags = Tag.joins(:photos).all
+    @searched_tags = Tag.where(name: params[:search].split(';')).all
   end
 
   def show
-    @gallery = Gallery.where('LOWER(name) = ?', filtered_id).first
+    @tag = Tag.where('LOWER(name) = ?', filtered_id).first
   end
 
   private

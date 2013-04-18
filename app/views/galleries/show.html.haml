@@ -1,1 +1,3 @@
-= @gallery.name
+%section
+  - @tag.photos.each do |photo|
+    = image_tag photo.image.url(:thumb)

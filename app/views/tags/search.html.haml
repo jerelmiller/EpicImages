@@ -1,19 +1,13 @@
 = form_tag search_tags_path, method: :get do
-  #searchInput.left
-  = submit_tag 'Search', class: 'searchSubmit'
-%section.galleries
+  .searchContainer.clearfix
+    #searchInput.left
+    = submit_tag 'Search', class: 'searchSubmit left'
+%section
+  - @photos.each do |photo|
+    = image_tag photo.image.url(:thumb)
+
 
 :javascript
-  var galleries = new EpicImages.Collections.Galleries(
-    #{render(partial: 'galleries', locals: { galleries: @galleries }, formats: [:json])}
-  );
-
-  var galleriesView = new EpicImages.Views.Galleries({
-      el: '.galleries',
-      collection: galleries
-  });
-
-  galleriesView.render();
 
   var tags = new EpicImages.Collections.Tags(
     #{render(partial: 'tags/tags', locals: { tags: @tags }, formats: [:json])}

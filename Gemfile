@@ -10,6 +10,7 @@ gem 'twitter-bootstrap-rails'
 gem 'paperclip-dropbox'
 gem 'execjs'
 gem 'jbuilder'
+gem 'squeel'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

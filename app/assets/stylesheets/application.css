@@ -1,7 +1,8 @@
 /*
  *= require_self
  *= require bootstrap_and_overrides
+ *= require select2
+ *= require select2_overrides
  *= require_tree ./main
  *= require_tree ./shared
- *= require select2
  */
