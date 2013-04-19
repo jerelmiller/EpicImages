@@ -30,7 +30,7 @@ nav {
       &:visited {
         color: $silver;
       }
-      &:hover {
+      &:hover, &.currentPage {
         border-bottom: 2px solid $lightGreen;
       }
     }

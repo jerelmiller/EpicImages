@@ -1,0 +1,14 @@
+@import 'colors';
+
+.searchSubmit {
+  background: $blue;
+  padding: 10px 15px;
+  font-family: Nexa, Helvetica, sans-serif;
+  border: 0;
+  color: white;
+  margin-left: 5px;
+}
+
+select.search {
+  width: 400px;
+}
