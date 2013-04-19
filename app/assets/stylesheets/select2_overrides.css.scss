@@ -1,3 +1,28 @@
+@import 'shared/colors';
+@import 'shared/mixins';
+
 .select2-choices {
-  padding: 6px !important;
+  padding: 5px !important;
+}
+
+.select2-search-choice {
+  padding: 0 !important;
+  border: 0 !important;
+  margin: 0 !important;
+  background: {
+    color: transparent !important;
+    image: none !important;
+  }
+
+  @include box-shadow(0, 0, 0, 0, null, null, !important);
+
+  a {
+    display: inline !important;
+    font-size: 1.4em !important;
+    color: white !important;
+    position: relative !important;
+    top: 3px !important;
+    margin-right: 5px;
+    background: none;
+  }
 }

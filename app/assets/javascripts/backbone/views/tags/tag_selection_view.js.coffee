@@ -1,6 +1,7 @@
 class EpicImages.Views.TagSelection extends Backbone.View
 
   template: JST['backbone/templates/tags/tag_selection_template']
+  tagTemplate: JST['backbone/templates/tags/tag_template']
 
   initialize: =>
     @render = _.once @render
@@ -14,6 +15,7 @@ class EpicImages.Views.TagSelection extends Backbone.View
         width: 'element'
         placeholder: 'Search for photos'
         separator: ','
+        formatSelection: @formatSelection
 
       @_selector().on 'change', @appendToHiddenField
     else
@@ -32,6 +34,11 @@ class EpicImages.Views.TagSelection extends Backbone.View
 
   createSearchChoice: (term) =>
     @wrapTag(new Analyze.Models.Tag(name: $.trim(term)))
+
+  formatSelection: (object, container) =>
+    container.find('a').remove()
+    @tagTemplate
+      name: object.text
 
   wrapTag: (tag) =>
     id: tag.get('name') || 'default'

@@ -1,0 +1,3 @@
+.tag
+  %a.select2-search-choice-close{ href: '#', onclick: 'return false;', tabIndex: '-1'  } &times;
+  = @name
