@@ -1,6 +1,7 @@
 = form_tag search_path, method: :get do
-  #searchInput.left
-  = submit_tag 'Search', class: 'searchSubmit'
+  .searchContainer.clearfix
+    #searchInput.left
+    = submit_tag 'Search', class: 'searchSubmit left'
 %section.galleries
 
 :javascript
