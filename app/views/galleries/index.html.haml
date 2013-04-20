@@ -3,6 +3,8 @@
     #searchInput.left
     = submit_tag 'Search', class: 'searchSubmit left'
 %section.galleries
+  - if @galleries.empty?
+    %h1.center Sorry! We do not currently have any galleries.
 
 :javascript
   var galleries = new EpicImages.Collections.Galleries(

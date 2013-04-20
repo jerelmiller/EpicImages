@@ -1,0 +1,5 @@
+.blog
+  %h1.center= link_to "#{blog.title} &rarr;".html_safe, blog_path(blog)
+  .created.center= format_time blog.created_at
+  %p= simple_format truncate(blog.body, length: Blog::TRUNCATE_LENGTH)
+  = read_more_link(blog)

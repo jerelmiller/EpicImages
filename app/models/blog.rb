@@ -5,7 +5,17 @@ class Blog < ActiveRecord::Base
   validates :title, :body, presence: true
   validates :title, uniqueness: true
 
+  TRUNCATE_LENGTH = 1000
+
+  def self.order_most_recent
+    order('created_at desc')
+  end
+
   def self.most_recent
-    order('created_at desc').last
+    order_most_recent.first
+  end
+
+  def to_param
+    "#{id}-#{title.parameterize}"
   end
 end

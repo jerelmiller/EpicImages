@@ -37,6 +37,18 @@ ul, ol {
   clear: both;
 }
 
+.center {
+  text-align: center;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
 .clearfix:after {
   content: ".";
   display: block;

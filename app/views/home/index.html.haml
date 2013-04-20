@@ -47,5 +47,3 @@
       = truncate(@blog.body, length: 385)
       - if @blog.body.length > 385
         %strong= link_to 'Continue Reading &Rarr;'.html_safe, blog_path(@blog)
-
-    %h3.readMore= link_to 'Read More &rarr;'.html_safe, blogs_path

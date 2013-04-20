@@ -1,0 +1,7 @@
+%section
+  .blog
+    = link_to 'Back to Blogs', blogs_path, class: 'button absolute'
+    %h1.center= @blog.title
+    .created.center= format_time @blog.created_at
+    %hr
+    %p= simple_format @blog.body

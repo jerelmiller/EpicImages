@@ -1,0 +1,25 @@
+@import 'shared/colors';
+
+.blog {
+  border-bottom: 2px dashed $lightGreen;
+  padding: 40px 0;
+  position: relative;
+  &:first-child {
+    padding-top: 0;
+  }
+  &:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+  h1 {
+    color: $blue;
+  }
+  .created {
+    font-size: 14px;
+  }
+  hr {
+    border-top: 0;
+    border-bottom: 2px dashed $lightGreen;
+    margin: 20px 0;
+  }
+}
