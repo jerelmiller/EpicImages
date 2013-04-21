@@ -8,8 +8,9 @@ EpicImages::Application.routes.draw do
   get '/about_us', to: 'home#about_us'
   get '/contact_us', to: 'home#contact_us'
   resources :blogs, only: [:index, :show]
-  resources :galleries, path: 'gallery', only: [:index, :show]
-  get '/search' => 'tags#search', as: :search
+  # resources :galleries, path: 'gallery', only: [:index, :show]
+  resources :tags, path: 'gallery', only: [:index, :show]
+  get 'photos/search' => 'tags#search', as: :photos_search
 
   namespace :admin do
     resource :users, only: [:edit, :update]

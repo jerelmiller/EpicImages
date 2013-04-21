@@ -2,7 +2,9 @@
 @import 'shared/mixins';
 
 .select2-choices {
-  padding: 0 5px 3px !important;
+  padding: 3px 5px 0 !important;
+  border: 1px solid #CCC !important;
+  background-image: none !important;
 }
 
 .select2-search-choice {

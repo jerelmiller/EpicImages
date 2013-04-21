@@ -20,4 +20,6 @@
 //= require backbone
 //= require backbone/epic_images
 //= require hamlcoffee
+//= require spin
+//= require jquery.spin
 //= require_tree .

@@ -58,3 +58,13 @@ p {
 .readMore {
   margin-top: 40px;
 }
+
+.carousel .item {
+  width: 920px;
+  height: 615px;
+  background: #EFEFEF;
+
+  img {
+    display: none;
+  }
+}
