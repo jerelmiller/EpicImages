@@ -1,0 +1,16 @@
+.photos {
+  .photo {
+    width: 300px;
+    height: 200px;
+    margin: 0 0 10px 10px;
+    float: left;
+    position: relative;
+    background: #EFEFEF;
+    img {
+      display: none;
+    }
+  }
+  .photo:nth-child(3n + 1) {
+    margin-left: 0;
+  }
+}

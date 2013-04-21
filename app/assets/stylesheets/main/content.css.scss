@@ -30,8 +30,12 @@ section {
     color: white;
   }
 
-  &.galleries {
+  &.galleries, &.photos {
     padding-bottom: 10px;
+  }
+
+  &.actions {
+    padding: 10px;
   }
 }
 

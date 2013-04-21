@@ -1,0 +1,4 @@
+%a{ href: @show_link }
+  .imageWrapper
+    %img{ src: @src, alt: @name, title: @name }
+    .caption= _.str.titleize @name

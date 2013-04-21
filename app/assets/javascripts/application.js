@@ -17,6 +17,7 @@
 //= require twitter/bootstrap
 //= require select2
 //= require underscore
+//= require underscore.string
 //= require backbone
 //= require backbone/epic_images
 //= require hamlcoffee

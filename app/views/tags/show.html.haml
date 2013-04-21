@@ -1,0 +1,5 @@
+%section.photos
+  .photosContainer
+  - @tag.photos.each do |photo|
+    .photo= image_tag photo.image.url(:thumb)
+  .clear

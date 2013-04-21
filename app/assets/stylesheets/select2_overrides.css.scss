@@ -3,8 +3,18 @@
 
 .select2-choices {
   padding: 3px 5px 0 !important;
+  line-height: 35px !important;
   border: 1px solid #CCC !important;
   background-image: none !important;
+}
+
+.select2-search-field {
+  position: relative !important;
+  top: -3px !important;
+
+  input {
+    font-family: Nexa, Helvetica, sans-serif !important;
+  }
 }
 
 .select2-search-choice {

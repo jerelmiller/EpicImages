@@ -1,0 +1,35 @@
+= form_tag photos_search_path, method: :get do
+  .searchContainer.clearfix.fullWidth
+    = submit_tag 'Search', class: 'searchSubmit right'
+    #searchInput.right
+%section.galleries
+  - if @galleries.empty?
+    %h1.center Sorry! We do not currently have any galleries.
+
+:javascript
+  var galleries = new EpicImages.Collections.Tags(
+    #{render(partial: 'tags', locals: { tags: @galleries }, formats: [:json])}
+  );
+
+  var tags = new EpicImages.Collections.Tags(
+    #{render(partial: 'tags', locals: { tags: @searchable_tags }, formats: [:json])}
+  );
+
+  var searchTags = new EpicImages.Collections.Tags(
+    #{render(partial: 'tags', locals: { tags: @searched_tags }, formats: [:json])}
+  );
+
+  var galleriesView = new EpicImages.Views.TagGalleries({
+      el: '.galleries',
+      collection: galleries
+  });
+
+  var tagSelectionView = new EpicImages.Views.TagSelection({
+    el: '#searchInput',
+    collection: tags,
+    tagData: searchTags,
+    type: 'select'
+  });
+
+  galleriesView.render();
+  tagSelectionView.render();

@@ -49,6 +49,10 @@ ul, ol {
   position: relative;
 }
 
+.fullWidth {
+  width: 100%;
+}
+
 .clearfix:after {
   content: ".";
   display: block;

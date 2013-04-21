@@ -9,3 +9,8 @@ $ ->
   $('#photoCarousel').imagesLoaded ($images) ->
     $(@).spin false
     $images.fadeIn()
+
+  $('.photo').spin()
+  $('.photo').imagesLoaded ($image) ->
+    $(@).spin false
+    $image.fadeIn()

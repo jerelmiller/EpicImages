@@ -1,8 +1,8 @@
 class TagsController < ApplicationController
 
   def index
-    # @galleries = Gallery.all
-    @tags = Tag.joins(:photos).all
+    @galleries = Tag.gallery
+    @searchable_tags = Tag.joins(:photos).all
     @searched_tags = Tag.where(name: params[:search].split(';')).all if params[:search]
   end
 

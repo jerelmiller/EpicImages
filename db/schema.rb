@@ -11,23 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130416040728) do
+ActiveRecord::Schema.define(:version => 20130421003436) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
     t.text     "body"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "galleries", :force => true do |t|
-    t.string   "name",                     :null => false
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
-    t.string   "cover_photo_file_name"
-    t.string   "cover_photo_content_type"
-    t.integer  "cover_photo_file_size"
-    t.datetime "cover_photo_updated_at"
   end
 
   create_table "photos", :force => true do |t|
@@ -58,9 +48,11 @@ ActiveRecord::Schema.define(:version => 20130416040728) do
   end
 
   create_table "tags", :force => true do |t|
-    t.string   "name",       :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "name",                            :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "gallery_flag", :default => false, :null => false
+    t.integer  "photo_id"
   end
 
   create_table "users", :force => true do |t|
