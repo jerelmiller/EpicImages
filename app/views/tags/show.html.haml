@@ -1,5 +1,7 @@
+= link_to 'Back to Gallery', tags_path, class: 'button left'
+%h1.right= @tag.name.upcase
+.clear
 %section.photos
-  .photosContainer
   - @tag.photos.each do |photo|
-    .photo= image_tag photo.image.url(:thumb)
+    .photo{ style: "height: #{photo.image.height(:thumb)}px" }= image_tag photo.image.url(:thumb)
   .clear

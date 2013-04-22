@@ -14,3 +14,6 @@ $ ->
   $('.photo').imagesLoaded ($image) ->
     $(@).spin false
     $image.fadeIn()
+
+  $('.photos').masonry
+    itemSelector: '.photo'

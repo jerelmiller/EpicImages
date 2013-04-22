@@ -3,5 +3,5 @@ json.(tag,
   :name
 )
 
-json.src tag.try(:gallery_photo).try(:image).try(:url, :cropped)
+json.src tag.try(:gallery_photo).try(:image).try(:url, :thumb_cropped)
 json.show_link tag_path(tag)

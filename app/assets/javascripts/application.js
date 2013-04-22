@@ -14,6 +14,9 @@
 //= require jquery_ujs
 //= require jquery.easing
 //= require jquery.imagesloaded
+//= require jquery.masonry
+//= require spin
+//= require jquery.spin
 //= require twitter/bootstrap
 //= require select2
 //= require underscore
@@ -21,6 +24,4 @@
 //= require backbone
 //= require backbone/epic_images
 //= require hamlcoffee
-//= require spin
-//= require jquery.spin
 //= require_tree .
