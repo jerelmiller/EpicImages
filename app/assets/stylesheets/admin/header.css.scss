@@ -1,0 +1,46 @@
+@import 'shared/colors';
+
+header {
+  background: $blue;
+  padding: 20px;
+
+  a {
+    color: $silver;
+    &.profile {
+      font-size: 14px;
+      display: block;
+      padding-right: 15px;
+    }
+  }
+}
+
+nav {
+  width: 90%;
+  font-size: 20px;
+  height: 67px;
+  margin: 0 auto;
+  .adminLogo {
+    background: url('admin_logo.png') 0 -1px no-repeat;
+    height: 71px;
+    width: 300px;
+  }
+  ul {
+    list-style-type: none;
+    margin-top: 33px;
+    li {
+      display: inline;
+    }
+
+    a {
+      display: block;
+      float: left;
+      padding: 8px 15px;
+      &:visited {
+        color: $silver;
+      }
+      &:hover, &.currentPage {
+        border-bottom: 2px solid $lightGreen;
+      }
+    }
+  }
+}

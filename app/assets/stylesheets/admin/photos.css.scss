@@ -1,0 +1,12 @@
+.photos {
+  .photo {
+    width: 222px;
+    margin: 5px;
+    float: left;
+    position: relative;
+    background: #EFEFEF;
+    img {
+      display: none;
+    }
+  }
+}

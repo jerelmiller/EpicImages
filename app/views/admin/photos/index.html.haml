@@ -1,4 +1,6 @@
-= link_to 'Add new photo', new_admin_photo_path
+= link_to 'Add new photo', new_admin_photo_path, class: 'button'
 
-%div Photos
-%div= render @photos
+%section.photos
+  / %h2.sectionTitle Photos
+  = render @photos
+  .clear

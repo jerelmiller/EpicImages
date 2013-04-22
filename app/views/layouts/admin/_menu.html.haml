@@ -1,5 +1,10 @@
-%ul.menu
-  %li= link_to 'Profile', edit_admin_users_path
-  %li= link_to 'Images', admin_photos_path
-  %li= link_to 'Blogs', admin_blogs_path
-  %li= link_to 'Galleries', admin_galleries_path
+%header
+  %nav.menu
+    = link_to admin_root_path, class: 'clearfix' do
+      .adminLogo.left
+    .right
+      .right= link_to "#{current_user} &rarr;".html_safe, edit_admin_users_path, class: 'profile'
+      %ul
+        %li= link_to 'HOME', admin_root_path, class: current_page_class(admin_root_path)
+        %li= link_to 'IMAGES', admin_photos_path, class: current_page_class(admin_photos_path)
+        %li= link_to 'BLOGS', admin_blogs_path, class: current_page_class(admin_blogs_path)

@@ -1,2 +1,2 @@
-= link_to image_tag(photo.image.url(:cropped)), edit_admin_photo_path(photo)
-= photo.title
+.photo{ style: "height: #{photo.image.height(:thumb)}px"}
+  = link_to image_tag(photo.image.url(:thumb)), edit_admin_photo_path(photo)
