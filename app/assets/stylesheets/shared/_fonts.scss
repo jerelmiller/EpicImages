@@ -8,6 +8,16 @@ $nexa_bold_path: url('nexa_bold.woff'),
                  url('nexa_bold.eot'),
                  url('nexa_bold.svg');
 
+$icons_16_path: url('Flat-UI-Icons-16.woff'),
+                url('Flat-UI-Icons-16.ttf'),
+                url('Flat-UI-Icons-16.eot'),
+                url('Flat-UI-Icons-16.svg');
+
+$icons_24_path: url('Flat-UI-Icons-24.woff'),
+                url('Flat-UI-Icons-24.ttf'),
+                url('Flat-UI-Icons-24.eot'),
+                url('Flat-UI-Icons-24.svg');
+
 @font-face {
   font: {
     family: Nexa;
@@ -22,4 +32,20 @@ $nexa_bold_path: url('nexa_bold.woff'),
     weight: bold;
   }
   src: $nexa_bold_path;
+}
+
+@font-face {
+  font: {
+    family: Icon;
+    weight: normal;
+  }
+  src: $icons_16_path;
+}
+
+@font-face {
+  font: {
+    family: Icon;
+    weight: bold;
+  }
+  src: $icons_24_path;
 }

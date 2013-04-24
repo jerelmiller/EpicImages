@@ -1,4 +1,6 @@
-= link_to 'Add new photo', new_admin_photo_path, class: 'button'
+= link_to new_admin_photo_path, class: 'button' do
+  %span.icon16.plus
+  Add new photo
 
 %section.photos
   / %h2.sectionTitle Photos

@@ -7,4 +7,9 @@ module ApplicationHelper
   def format_time(time)
     time.strftime '%A, %B %-d, %Y'
   end
+
+  def submit_text(model)
+    return "Create #{model}" if params[:action].eql? 'new'
+    "Update #{model}"
+  end
 end

@@ -7,4 +7,5 @@
     %label Description
     = f.text_area :body
   .submit
-    = f.submit
+    = f.submit submit_text('Blog'), class: 'button'
+    = link_to 'Cancel', admin_blogs_path, class: 'button red'

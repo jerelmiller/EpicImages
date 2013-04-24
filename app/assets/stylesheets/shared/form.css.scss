@@ -1,4 +1,5 @@
 @import 'colors';
+@import 'mixins';
 
 .searchSubmit {
   background: $blue;
@@ -14,10 +15,92 @@ select.search {
 }
 
 .input {
-  margin: 10px;
-
+  margin: 20px 0;
+  position: relative;
+  width: 335px;
   label {
-    float: left;
+    font-size: 18px;
     width: 200px;
+    display: block;
+    margin-bottom: 5px;
+  }
+  &.checkbox {
+    label {
+      display: inline-block;
+      position: relative;
+      top: 3px;
+    }
+  }
+}
+
+input[type=text], input[type=email], input[type=password], textarea {
+  border: 1px solid #CCC;
+  @include border-radius(3px);
+  padding: 8px;
+  color: #333;
+  width: 300px;
+  &:focus {
+    outline: none;
+    @include box-shadow(0, 0, 3px, 1px, #CCC);
+  }
+  &.inputIcon {
+    width: 270px;
+    padding-right: 38px;
+  }
+}
+
+span.icon16 {
+  font-family: Icon !important;
+  &.mail:after {
+    content: "\e008";
+  }
+  &.lock:after {
+    content: "\e009";
+  }
+  &.bubble:after {
+    content: "\e013";
+  }
+  &.edit:after {
+    content: "\e005";
+  }
+  &.plus:after {
+    content: "\e004";
+  }
+  &.cross:after {
+    content: "\e00d";
+  }
+  .sectionTitle & {
+    position: relative;
+    top: 2px;
+    margin-right: 10px;
+  }
+  .button & {
+    position: relative;
+    top: 2px;
+    margin-right: 5px;
+    &.plus {
+      top: 1px;
+    }
+  }
+}
+
+span.icon24 {
+  @extend span.icon16;
+  font-weight: bold;
+  &.plus:after {
+    content: "\e003";
+  }
+}
+
+label.icon {
+  width: 16px;
+  display: inline-block;
+  @extend span.icon16;
+  &.inputIcon {
+    color: $blue;
+    position: absolute;
+    right: 35px;
+    top: 36px;
+    cursor: auto;
   }
 }

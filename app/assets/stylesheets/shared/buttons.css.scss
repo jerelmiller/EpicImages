@@ -6,11 +6,26 @@
   font-family: Nexa, Helvetica, sans-serif;
   border: 0;
   color: white;
+  &.red {
+    background: $red;
+  }
 }
 
-a.button {
+.button + .button {
+  margin-left: 10px;
+}
+
+input[type=submit].button {
+  vertical-align: inherit;
+}
+
+a.button, input[type=submit].button {
   &:hover {
     color: white;
     background: lighten($blue, 10%);
+  }
+  &.red:hover {
+    color: white;
+    background: lighten($red, 10%);
   }
 }

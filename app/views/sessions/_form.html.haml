@@ -2,9 +2,11 @@
   = render 'layouts/flash', flash: flash
   .input
     = label_tag :email
-    = text_field_tag :email
+    = text_field_tag :email, '', class: 'inputIcon'
+    %label.icon.inputIcon.mail
   .input
-    = label_tag :password
+    = label_tag :password, 'Password', class: 'inputIcon'
     = password_field_tag :password
+    %label.icon.inputIcon.lock
   .submit
-    = submit_tag "Log In"
+    = submit_tag "Login", class: 'button'
