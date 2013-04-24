@@ -15,10 +15,10 @@
     #{render(partial: 'tags/tags', locals: { tags: @photo_tags }, formats: [:json])}
   );
 
-  var tagSelectionView = new EpicImages.Views.TagSelection({
+  var tagInputView = new EpicImages.Views.TagInput({
     el: '#tagsInput',
     collection: tags,
     tagData: photoTags
   });
 
-  tagSelectionView.render();
+  tagInputView.render();

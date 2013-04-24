@@ -1,0 +1,1 @@
+%input#tags{ name: 'tags', type: 'text' }

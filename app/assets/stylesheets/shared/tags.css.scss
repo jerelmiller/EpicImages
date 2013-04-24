@@ -16,4 +16,8 @@
     position: relative;
     top: 3px;
   }
+
+  .select2-search-choice-focus & {
+    background: darken($red, 15%);
+  }
 }

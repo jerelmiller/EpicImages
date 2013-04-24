@@ -3,7 +3,6 @@ class TagsController < ApplicationController
   def index
     @galleries = Tag.gallery
     @searchable_tags = Tag.joins(:photos).all
-    @searched_tags = Tag.where(name: params[:search].split(';')).all if params[:search]
   end
 
   def show

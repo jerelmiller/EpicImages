@@ -1,7 +1,4 @@
-- if @type == 'select'
-  %input{ type: 'hidden', name: 'search', value: @searchedTags.map((tag) => tag.get('name')).join(';') }
-  %select.search{ multiple: true }
-    - for tag in @tags
-      %option{ value: tag.get('name') }= tag.get('name')
-- else
-  %input#tags{ name: 'tags', type: 'text' }
+%input{ type: 'hidden', name: 'search', value: @searchedTags?.map((tag) => tag.get('name')).join(';') }
+%select.search{ multiple: true }
+  - for tag in @tags
+    %option{ value: tag.get('name') }= tag.get('name')

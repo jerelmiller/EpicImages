@@ -7,29 +7,23 @@ class EpicImages.Views.TagSelection extends Backbone.View
     @render = _.once @render
 
   render: =>
-    @$el.html @template _.extend {}, @options, tags: @collection.models, searchedTags: @options.tagData
+    @$el.html @template _.extend {}, tags: @collection.models, searchedTags: @options.tagData
 
-    if @options.type == 'select'
-      @_selector().select2
-        escapeMarkup: (m) => m
-        width: 'element'
-        placeholder: 'Search for photos'
-        separator: ','
-        formatSelection: @formatSelection
+    @$("select.search").select2
+      escapeMarkup: (m) => m
+      width: 'element'
+      placeholder: 'Search for photos'
+      separator: ','
+      formatSelection: @formatSelection
 
-      @_selector().on 'change', @appendToHiddenField
-    else
-      @_selector().select2
-        escapeMarkup: (m) => m
-        width: 'element'
-        tags: @collection.map(@wrapTag)
+    @$("select.search").on 'change', @appendToHiddenField
 
     @updateView()
 
   updateView: =>
     if @options.tagData
       tags = @options.tagData.map @wrapTag
-      @_selector().select2 'data', tags
+      @$("select.search").select2 'data', tags
       @
 
   createSearchChoice: (term) =>
@@ -44,10 +38,6 @@ class EpicImages.Views.TagSelection extends Backbone.View
     id: tag.get('name') || 'default'
     text: tag.get('name') || 'default'
     tag: tag
-
-  _selector: =>
-    return @$('input#tags') if @options.type != 'select'
-    @$("select.search")
 
   appendToHiddenField: (e) =>
     vals = _.compact @$('input[name=search]').val().split(';')

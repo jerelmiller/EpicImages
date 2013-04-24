@@ -1,0 +1,68 @@
+@import 'colors';
+
+span.icon16 {
+  font: {
+    family: Icon !important;
+    size: 16px;
+  }
+  &.mail:after {
+    content: "\e008";
+  }
+  &.lock:after {
+    content: "\e009";
+  }
+  &.bubble:after {
+    content: "\e013";
+  }
+  &.edit:after {
+    content: "\e005";
+  }
+  &.plus:after {
+    content: "\e004";
+  }
+  &.cross:after {
+    content: "\e00d";
+  }
+  &.man:after {
+    content: "\e007";
+  }
+  .sectionTitle & {
+    position: relative;
+    top: 2px;
+    margin-right: 10px;
+  }
+  .button & {
+    position: relative;
+    top: 2px;
+    margin-right: 5px;
+    &.plus {
+      top: 1px;
+    }
+  }
+  &.red {
+    color: $red;
+  }
+}
+
+span.icon24 {
+  @extend span.icon16;
+  font: {
+    weight: bold;
+    size: 24px;
+  }
+  &.plus:after {
+    content: "\e003";
+  }
+}
+
+label.icon {
+  width: 16px;
+  display: inline-block;
+  @extend span.icon16;
+  &.inputIcon {
+    color: $blue;
+    position: absolute;
+    right: 35px;
+    top: 36px;
+  }
+}

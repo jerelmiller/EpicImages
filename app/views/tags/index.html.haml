@@ -15,10 +15,6 @@
     #{render(partial: 'tags', locals: { tags: @searchable_tags }, formats: [:json])}
   );
 
-  var searchTags = new EpicImages.Collections.Tags(
-    #{render(partial: 'tags', locals: { tags: @searched_tags }, formats: [:json])}
-  );
-
   var galleriesView = new EpicImages.Views.TagGalleries({
       el: '.galleries',
       collection: galleries
@@ -26,9 +22,7 @@
 
   var tagSelectionView = new EpicImages.Views.TagSelection({
     el: '#searchInput',
-    collection: tags,
-    tagData: searchTags,
-    type: 'select'
+    collection: tags
   });
 
   galleriesView.render();
