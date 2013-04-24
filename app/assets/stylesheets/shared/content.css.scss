@@ -1,5 +1,5 @@
-@import 'shared/colors';
-@import 'shared/mixins';
+@import 'colors';
+@import 'mixins';
 
 .content {
   width: 960px;
@@ -22,8 +22,24 @@ section {
     }
   }
 
+  &.attention {
+    background: $red;
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 40px;
+    color: white;
+  }
+
+  &.galleries {
+    padding-bottom: 10px;
+  }
+
   &.photos {
     padding: 15px;
+  }
+
+  &.actions {
+    padding: 10px;
   }
 }
 
