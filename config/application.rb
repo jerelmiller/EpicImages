@@ -61,7 +61,7 @@ module EpicImages
     config.assets.initialize_on_precompile = false
 
     # Precompile additional assets
-    config.assets.precompile += ['admin.css.scss']
+    config.assets.precompile += %w(admin.css)
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
