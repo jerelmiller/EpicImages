@@ -1,4 +1,5 @@
 class Admin::PhotosController < Admin::AdminController
+  before_filter :load_photo, only: [:edit, :update, :destroy]
 
   def index
     @photos = Photo.order('created_at desc')
@@ -26,13 +27,11 @@ class Admin::PhotosController < Admin::AdminController
   end
 
   def edit
-    @photo = Photo.find(params[:id])
     @tags = Tag.all
     @photo_tags = @photo.tags
   end
 
   def update
-    @photo = Photo.find(params[:id])
     path = admin_photos_path
 
     ActiveRecord::Base.transaction do
@@ -48,6 +47,16 @@ class Admin::PhotosController < Admin::AdminController
     redirect_to path
   end
 
+  def destroy
+    if @photo.destroy
+      flash[:success] = "The photo was successfully deleted"
+      redirect_to admin_photos_path and return
+    else
+      flash[:error] = "There was a problem deleting the photo. Please try again"
+      redirect_to request.referer
+    end
+  end
+
   private
 
     def get_tags
@@ -55,5 +64,9 @@ class Admin::PhotosController < Admin::AdminController
       tags << Tag.where(name: params[:tags].split(',')).all
       tags << params[:tags].split(',').reject{ |tag| tags.flatten.map(&:name).include? tag }.map{ |tag| Tag.create(name: tag) }
       tags.flatten
+    end
+
+    def load_photo
+      @photo = Photo.find(params[:id])
     end
 end

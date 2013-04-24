@@ -2,6 +2,8 @@
   %h2.sectionTitle
     %span.icon24.edit
     Edit photo
+  = link_to admin_photo_path(@photo), method: :delete, class: 'delete', 'data-confirm' => 'Are you sure you want to delete this?' do
+    %span.icon24.cross.red
   = render 'form'
 
 :javascript

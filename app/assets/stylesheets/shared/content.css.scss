@@ -9,6 +9,7 @@
 section {
   padding: 20px;
   background: white;
+  position: relative;
   @include border-radius(2px);
   @include box-shadow(0, 0, 9px, null, rgba(0, 0, 0, 0.1));
   margin-top: 20px;
@@ -40,6 +41,12 @@ section {
 
   &.actions {
     padding: 10px;
+  }
+
+  .delete {
+    position: absolute;
+    top: 20px;
+    right: 20px;
   }
 }
 

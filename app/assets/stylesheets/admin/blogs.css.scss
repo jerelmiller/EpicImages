@@ -1,0 +1,23 @@
+$textGray: #666;
+$blue: #34495E;
+$darkBlue: #2C3E50;
+$silver: #ECF0F1;
+$lightGreen: #95A5A6;
+$red: #E74C2F;
+
+.blog {
+  border-bottom: 1px solid #CCC;
+  padding: 20px 0;
+  &:last-child {
+    border-bottom: 0;
+  }
+  a {
+    font-size: 20px;
+  }
+  .actions a {
+    margin-left: 10px;
+  }
+  .time {
+    margin-left: 20px;
+  }
+}

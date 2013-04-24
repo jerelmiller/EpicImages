@@ -1,4 +1,5 @@
 class Admin::BlogsController < Admin::AdminController
+  before_filter :load_blog, only: [:edit, :update, :destroy]
 
   def index
     @blogs = Blog.all
@@ -20,13 +21,7 @@ class Admin::BlogsController < Admin::AdminController
     end
   end
 
-  def edit
-    @blog = Blog.find params[:id]
-  end
-
   def update
-    @blog = Blog.find params[:id]
-
     if @blog.update_attributes(params[:blog])
       flash[:success] = 'You have successfully updated the blog'
       redirect_to admin_blogs_path
@@ -35,4 +30,19 @@ class Admin::BlogsController < Admin::AdminController
       render :edit
     end
   end
+
+  def destroy
+    if @blog.destroy
+      flash[:success] = 'You have successfully deleted the blog'
+    else
+      flash[:error] = 'Could not delete the blog. Please try again'
+    end
+    redirect_to admin_blogs_path
+  end
+
+  private
+
+    def load_blog
+      @blog = Blog.find params[:id]
+    end
 end

@@ -2,18 +2,24 @@
   = render 'layouts/flash', flash: flash
   .input
     %label Email
-    = f.text_field :email
+    = f.text_field :email, class: 'inputIcon'
+    %label.icon.inputIcon.mail
   .input
     %label First Name
-    = f.text_field :first_name
+    = f.text_field :first_name, class: 'inputIcon'
+    %label.icon.inputIcon.man
   .input
     %label Last Name
-    = f.text_field :last_name
+    = f.text_field :last_name, class: 'inputIcon'
+    %label.icon.inputIcon.man
   .input
     %label Password
-    = f.password_field :password
+    = f.password_field :password, class: 'inputIcon'
+    %label.icon.inputIcon.lock
   .input
     %label.passConfirm Password Confirmation
-    = f.password_field :password_confirmation
+    = f.password_field :password_confirmation, class: 'inputIcon'
+    %label.icon.inputIcon.lock
   .submit
-    = f.submit 'Update', class: 'btn btn-primary btn-large'
+    = f.submit 'Update', class: 'button'
+    = link_to 'Cancel', admin_root_path, class: 'button red'
