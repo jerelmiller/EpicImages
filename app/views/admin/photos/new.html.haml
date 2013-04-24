@@ -9,7 +9,7 @@
     #{render(partial: 'tags/tags', locals: { tags: @tags }, formats: [:json])}
   );
 
-  var tagSelectionView = new EpicImages.Views.TagSelection({
+  var tagSelectionView = new EpicImages.Views.TagInput({
     el: '#tagsInput',
     collection: tags
   });
