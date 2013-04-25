@@ -14,5 +14,5 @@
     = f.check_box :featured_flag
     %label Featured
   .submit
-    = f.submit submit_text('Photo'), class: 'button'
-    = link_to 'Cancel', admin_photos_path, class: 'button red'
+    = save_button
+    = link_to_cancel admin_photos_path

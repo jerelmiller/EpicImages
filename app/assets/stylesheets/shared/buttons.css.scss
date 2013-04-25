@@ -15,11 +15,11 @@
   margin-left: 10px;
 }
 
-input[type=submit].button {
+input[type=submit].button, button.button {
   vertical-align: inherit;
 }
 
-a.button, input[type=submit].button {
+a.button, input[type=submit].button, button.button {
   &:hover {
     color: white;
     background: lighten($blue, 10%);

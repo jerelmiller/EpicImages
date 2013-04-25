@@ -11,6 +11,14 @@ header {
       font-size: 14px;
       display: block;
       padding-right: 15px;
+      .caret {
+        position: relative;
+        top: 5px;
+        border-top: 4px solid $silver;
+      }
+      &:active, &:focus {
+        outline: 0;
+      }
     }
   }
 }

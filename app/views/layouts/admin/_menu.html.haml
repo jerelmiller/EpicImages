@@ -4,7 +4,9 @@
       .adminLogo.left
     .right
       .relative.right
-        = link_to current_user, '#', class: 'profile dropdown-toggle', 'data-toggle' => 'dropdown'
+        = link_to '#', class: 'profile dropdown-toggle', 'data-toggle' => 'dropdown' do
+          = current_user
+          %b.caret
         %ul.dropdown-menu
           %li
             = link_to edit_admin_users_path do
