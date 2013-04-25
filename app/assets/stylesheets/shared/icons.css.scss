@@ -44,6 +44,24 @@ span.icon16 {
   }
 }
 
+[class^="icon16-"], [class*=" icon16-"] {
+  font: {
+    family: Icon !important;
+    size: 16px;
+  }
+  &.red {
+    color: $red;
+  }
+  .button & {
+    position: relative;
+    top: 2px;
+    margin-right: 5px;
+    &.plus {
+      top: 1px;
+    }
+  }
+}
+
 span.icon24 {
   @extend span.icon16;
   font: {
@@ -64,5 +82,13 @@ label.icon {
     position: absolute;
     right: 35px;
     top: 36px;
+  }
+}
+
+span.glyph {
+  font-family: Glyph;
+  font-style: normal;
+  &.exit:after {
+    content: "\f324";
   }
 }

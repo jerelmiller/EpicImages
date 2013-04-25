@@ -49,3 +49,16 @@ $icons_24_path: url('Flat-UI-Icons-24.woff'),
   }
   src: $icons_24_path;
 }
+
+@font-face {
+  font: {
+    family: Glyph;
+    weight: normal;
+    style: normal;
+  }
+  src: url('glyphs.eot');
+  src: url('glyphs.eot?#iefix') format('embedded-opentype'),
+       url('glyphs.ttf') format('truetype'),
+       url('glyphs.svg'),
+       url('glyphs.woff');
+}

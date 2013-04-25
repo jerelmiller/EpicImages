@@ -1,4 +1,5 @@
 @import 'shared/colors';
+@import 'shared/mixins';
 
 header {
   background: $blue;
@@ -11,6 +12,37 @@ header {
       display: block;
       padding-right: 15px;
     }
+  }
+}
+
+.dropdown-menu {
+  @include border-radius(4px);
+  font-size: 16px;
+  a {
+    color: $blue;
+    &:visited {
+      color: $blue;
+    }
+    float: none;
+  }
+
+  li {
+    display: block;
+  }
+
+  & > li > a {
+    padding: 3px 10px 5px;
+    line-height: 16px;
+    &:hover {
+      background: lighten($blue, 10%);
+      border-bottom: 0;
+    }
+  }
+
+  .icon16, .glyph {
+    margin-right: 10px;
+    position: relative;
+    top: 2px;
   }
 }
 
