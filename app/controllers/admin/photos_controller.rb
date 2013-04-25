@@ -62,7 +62,7 @@ class Admin::PhotosController < Admin::AdminController
     def get_tags
       tags = []
       tags << Tag.where(name: params[:tags].split(',')).all
-      tags << params[:tags].split(',').reject{ |tag| tags.flatten.map(&:name).include? tag }.map{ |tag| Tag.create(name: tag) }
+      tags << params[:tags].split(',').reject{ |tag| tags.flatten.map(&:name).include? tag }.map{ |tag| Tag.create(name: tag.downcase) }
       tags.flatten
     end
 
