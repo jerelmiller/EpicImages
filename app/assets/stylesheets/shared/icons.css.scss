@@ -100,4 +100,7 @@ span.glyph {
   &.save:after {
     content: "\f0c8";
   }
+  &.search:after {
+    content: "\f0c5";
+  }
 }

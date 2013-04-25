@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def save_button
-    content_tag :button, class: 'button' do
+    button do
       concat content_tag :span, '', class: 'glyph save'
       concat 'Save'
     end
@@ -21,4 +21,20 @@ module ApplicationHelper
       concat 'Cancel'
     end
   end
+
+  def search_button(extra_classes = nil)
+    button(extra_classes) do
+      concat content_tag :span, '', class: 'glyph search'
+      concat 'Search'
+    end
+  end
+
+  private
+
+    def button(extra_classes = nil, &block)
+      content_tag :button, class: "button #{extra_classes}" do
+        yield
+      end
+    end
+
 end

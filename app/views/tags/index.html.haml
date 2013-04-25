@@ -1,6 +1,6 @@
 = form_tag photos_search_path, method: :get do
   .searchContainer.clearfix.fullWidth
-    = submit_tag 'Search', class: 'searchSubmit right'
+    = search_button('right')
     #searchInput.right
 %section.galleries
   - if @galleries.empty?
