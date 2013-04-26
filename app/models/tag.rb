@@ -11,6 +11,12 @@ class Tag < ActiveRecord::Base
     where gallery_flag: true
   end
 
+  def self.destroy_unused!
+    ActiveRecord::Base.transaction do
+      includes{ photos }.select{ |tag| tag.photos.length < 1 }.map(&:destroy)
+    end
+  end
+
   def to_param
     name.parameterize
   end

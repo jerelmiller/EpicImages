@@ -2,7 +2,7 @@ class TagsController < ApplicationController
 
   def index
     @galleries = Tag.gallery
-    @searchable_tags = Tag.joins(:photos).all
+    @searchable_tags = Tag.all
   end
 
   def show

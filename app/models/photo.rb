@@ -3,6 +3,8 @@ class Photo < ActiveRecord::Base
 
   attr_accessible :title, :image, :featured_flag
 
+  after_commit :destroy_unused_tags
+
   has_attached_file :image,
     storage: :dropbox,
     styles: { thumb: '222', thumb_cropped: '300x200#', cropped: '920x615#' },
@@ -15,4 +17,10 @@ class Photo < ActiveRecord::Base
   def self.featured
     where(featured_flag: true)
   end
+
+  private
+
+    def destroy_unused_tags
+      Tag.destroy_unused!
+    end
 end
