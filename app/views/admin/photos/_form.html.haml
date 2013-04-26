@@ -13,6 +13,10 @@
   .input.checkbox
     = f.check_box :featured_flag
     %label Featured
+  .divider
+  .input
+    %label Make tags a gallery
+    #galleryInput
   .submit
     = save_button
     = link_to_cancel admin_photos_path

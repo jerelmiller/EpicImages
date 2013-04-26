@@ -3,7 +3,7 @@
     %span.icon24.edit
     Edit photo
   = link_to admin_photo_path(@photo), method: :delete, class: 'delete', 'data-confirm' => 'Are you sure you want to delete this?' do
-    %span.icon24.cross.red
+    %span.glyph.trash.red.large
   = render 'form'
 
 :javascript
@@ -15,10 +15,22 @@
     #{render(partial: 'tags/tags', locals: { tags: @photo_tags }, formats: [:json])}
   );
 
+  var galleryTags = new EpicImages.Collections.Tags(
+    #{render(partial: 'tags/tags', locals: { tags: @galleries }, formats: [:json])}
+  );
+
   var tagInputView = new EpicImages.Views.TagInput({
     el: '#tagsInput',
     collection: tags,
     tagData: photoTags
   });
 
+  var tagSelectionView = new EpicImages.Views.TagSelection({
+    el: '#galleryInput',
+    collection: tags,
+    tagData: galleryTags,
+    fieldName: 'gallery_tags'
+  })
+
   tagInputView.render();
+  tagSelectionView.render();

@@ -11,6 +11,11 @@
   }
 }
 
+h1 .button {
+  font-size: 16px;
+  font-weight: normal;
+}
+
 button, .button {
   &:active, &:focus {
     outline: 0;

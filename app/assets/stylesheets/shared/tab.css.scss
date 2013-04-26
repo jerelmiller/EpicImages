@@ -1,0 +1,35 @@
+@import 'colors';
+@import 'mixins';
+
+.tabbedContainer {
+  position: relative;
+  .tab {
+    font-size: 20px;
+    padding-left: 20px;
+    color: $lightGreen;
+    position: relative;
+    &.selected {
+      font-weight: bold;
+    }
+  }
+}
+
+.arrowUp {
+  display: none;
+  position: absolute;
+  left: 50%;
+  z-index: 100;
+}
+
+.selected .arrowUp {
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #FFF;
+  &.border {
+    border-bottom-color: #DDD;
+    bottom: -7px;
+  }
+}

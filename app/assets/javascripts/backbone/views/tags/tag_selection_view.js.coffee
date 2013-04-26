@@ -4,15 +4,16 @@ class EpicImages.Views.TagSelection extends Backbone.View
   tagTemplate: JST['backbone/templates/tags/tag_template']
 
   initialize: =>
-    @render = _.once @render
+    @listenTo @collection, 'add remove', @render
+    @tagData = @options.tagData || new EpicImages.Collections.Tags()
 
   render: =>
-    @$el.html @template _.extend {}, tags: @collection.models, searchedTags: @options.tagData
+    @$el.html @template @_viewAttributes()
 
     @$("select.search").select2
       escapeMarkup: (m) => m
       width: 'element'
-      placeholder: 'Search for photos'
+      placeholder: @options.placeholder
       separator: ','
       formatSelection: @formatSelection
 
@@ -21,8 +22,8 @@ class EpicImages.Views.TagSelection extends Backbone.View
     @updateView()
 
   updateView: =>
-    if @options.tagData
-      tags = @options.tagData.map @wrapTag
+    if @tagData
+      tags = @tagData.map @wrapTag
       @$("select.search").select2 'data', tags
       @
 
@@ -40,9 +41,14 @@ class EpicImages.Views.TagSelection extends Backbone.View
     tag: tag
 
   appendToHiddenField: (e) =>
-    vals = _.compact @$('input[name=search]').val().split(';')
     if e.added
-      vals.push e.added.text
+      @tagData.findOrInitialize e.added.text
     else if e.removed
-      vals = _.without vals, e.removed.text
-    @$('input[name=search]').val vals.join(';')
+      @tagData.remove @tagData.where(name: e.removed.text)[0]
+    @$("input[name=#{@options.fieldName}]").val @tagData.map((tag) => tag.get('name')).join(';')
+
+  _viewAttributes: =>
+    _.extend {},
+      tags: @collection.models
+      searchedTags: @tagData
+      fieldName: @options.fieldName

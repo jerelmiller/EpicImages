@@ -94,6 +94,12 @@ span.glyph {
     top: 2px;
     margin-right: 10px;
   }
+  &.red {
+    color: $red;
+  }
+  &.large {
+    font-size: 24px;
+  }
   &.exit:after {
     content: "\f324";
   }
@@ -102,5 +108,18 @@ span.glyph {
   }
   &.search:after {
     content: "\f0c5";
+  }
+  &.trash:after {
+    content: "\f0ce";
+  }
+  &.images:after {
+    content: "\f09f";
+  }
+}
+
+h1 {
+  span.glyph {
+    font-size: 24px;
+    margin-right: 5px;
   }
 }

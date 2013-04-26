@@ -1,17 +1,10 @@
-/ = link_to new_admin_photo_path, class: 'button' do
-/   %span.icon16.plus
-/   Add new photo
-= link_to '#photoUpload', class: 'button', 'data-toggle' => 'modal' do
-  %span.icon16.plus
-  Add new photos
-
 #photoUpload.modal.hide.fade
   .modal-header
     %h2
       %span.icon24.plus
       Add new photos
   = form_for [:admin, @photo], html: { multipart: true } do |f|
-    .modal-body
+    .modal-body.extend
       .input
         %label Choose Photo
         = f.file_field :image
@@ -25,22 +18,87 @@
       .input.checkbox
         = f.check_box :featured_flag
         %label Featured
+      .divider
+      .input
+        %label Make tags a gallery
+        #galleryInput
     .modal-footer
       = save_button
       = cancel_button 'data-dismiss' => 'modal'
 
+.tabbedContainer
+  .tabHeader
+    %h1.sectionTitle.clearfix.fullWidth.photoTabs
+      .left
+        %span.glyph.images
+        Photos
+      = link_to '#photoUpload', class: 'button right', 'data-toggle' => 'modal' do
+        %span.icon16.plus
+        Add new photos
+    %h1.sectionTitle.clearfix.fullWidth.galleryTabs.hide{ style: 'display: none;' }
+      .left
+        %span.glyph.images
+        Galleries
+      = link_to '#photoUpload', class: 'button right', 'data-toggle' => 'modal' do
+        %span.icon16.plus
+        Edit Gallery
+    .tabs
+      = link_to '#', class: 'tab selected', id: 'photosView' do
+        Photos
+        %span.arrowUp.border
+        %span.arrowUp
+      = link_to '#', class: 'tab', id: 'galleriesView' do
+        %span Galleries
+        %span.arrowUp.border
+        %span.arrowUp
 %section.photos
   = render @photos
   .clear
+%section.galleries.hide
+  - if @galleries.empty?
+    %h1.center No galleries created yet. Go ahead and create one!
 
 :javascript
   var tags = new EpicImages.Collections.Tags(
     #{render(partial: 'tags/tags', locals: { tags: @tags }, formats: [:json])}
   );
 
-  var tagSelectionView = new EpicImages.Views.TagInput({
+  var galleryTags = new EpicImages.Collections.Tags(
+    #{render(partial: 'tags/tags', locals: { tags: @galleries }, formats: [:json])}
+  );
+
+  var galleriesView = new EpicImages.Views.TagGalleries({
+    el: '.galleries',
+    collection: galleryTags
+  });
+
+  var tagInputView = new EpicImages.Views.TagInput({
     el: '#tagsInput',
     collection: tags
   });
 
+  var tagSelectionView = new EpicImages.Views.TagSelection({
+    el: '#galleryInput',
+    collection: tags,
+    tagData: galleryTags,
+    fieldName: 'gallery_tags'
+  });
+
+  tagInputView.render()
   tagSelectionView.render();
+  galleriesView.render();
+
+  $(document).ready(function() {
+    $('#photosView').click(function() {
+      $('.tab').removeClass('selected');
+      $(this).addClass('selected');
+      $('.photos, .photoTabs').show()
+      $('.galleries, .galleryTabs').hide()
+    })
+    $('#galleriesView').click(function() {
+      $('.tab').removeClass('selected');
+      $(this).addClass('selected');
+      $('.photos, .photoTabs').hide();
+      $('.galleries, .galleryTabs').show();
+    })
+  });

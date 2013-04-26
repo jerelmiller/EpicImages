@@ -50,8 +50,18 @@ section {
   }
 }
 
+.tabbedContainer ~ section {
+  margin-top: 8px;
+}
+
 .sectionTitle {
   border-bottom: 1px dashed $lightGreen;
   padding-bottom: 10px;
   margin-bottom: 30px;
+}
+
+div.divider {
+  width: 90%;
+  border-bottom: 1px solid #EFEFEF;
+  margin: 10px auto;
 }

@@ -15,6 +15,8 @@ class EpicImages.Views.TagInput extends Backbone.View
       tags: @collection.map(@wrapTag)
       formatSelection: @formatSelection
 
+    @$('input#tags').on 'change', @changeCollection
+
     @updateView()
 
   updateView: =>
@@ -35,3 +37,12 @@ class EpicImages.Views.TagInput extends Backbone.View
     id: tag.get('name') || 'default'
     text: tag.get('name') || 'default'
     tag: tag
+
+  changeCollection: (e) =>
+    if e.added
+      @collection.findOrInitialize e.added.text
+    else if e.removed
+      @_removeTag @collection.where(name: e.removed.text)[0]
+
+  _removeTag: (tag) =>
+    @collection.remove tag

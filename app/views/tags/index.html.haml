@@ -22,7 +22,9 @@
 
   var tagSelectionView = new EpicImages.Views.TagSelection({
     el: '#searchInput',
-    collection: tags
+    collection: tags,
+    placeholder: 'Search for photos',
+    fieldName: 'search'
   });
 
   galleriesView.render();

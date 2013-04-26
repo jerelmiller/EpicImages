@@ -13,8 +13,9 @@ EpicImages::Application.routes.draw do
 
   namespace :admin do
     resource :users, only: [:edit, :update]
-    resources :photos
+    resources :photos, except: [:new, :show]
     resources :blogs
+    resources :tags, path: 'galleries'
     root :to => 'admin#index'
   end
 
