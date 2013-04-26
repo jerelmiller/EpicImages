@@ -28,20 +28,20 @@
 
 .tabbedContainer
   .tabHeader
-    %h1.sectionTitle.clearfix.fullWidth.photoTabs
-      .left
-        %span.glyph.images
-        Photos
+    .actions.absolute.photoTabs
       = link_to '#photoUpload', class: 'button right', 'data-toggle' => 'modal' do
         %span.icon16.plus
         Add new photos
-    %h1.sectionTitle.clearfix.fullWidth.galleryTabs.hide{ style: 'display: none;' }
-      .left
-        %span.glyph.images
-        Galleries
+    %h1.sectionTitle.photoTabs
+      %span.glyph.images
+      Photos
+    .actions.absolute.galleryTabs.hide
       = link_to '#photoUpload', class: 'button right', 'data-toggle' => 'modal' do
         %span.icon16.plus
         Edit Gallery
+    %h1.sectionTitle.galleryTabs.hide
+      %span.glyph.images
+      Galleries
     .tabs
       = link_to '#', class: 'tab selected', id: 'photosView' do
         Photos
