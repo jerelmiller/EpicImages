@@ -15,6 +15,14 @@ module ApplicationHelper
     end
   end
 
+  def cancel_button(options = {})
+    classes = options[:class].try(:concat, ' red') || 'red'
+    button options.merge(class: classes) do
+      concat content_tag :span, '', class: 'icon16 cross'
+      concat 'Cancel'
+    end
+  end
+
   def link_to_cancel(path)
     link_to path, class: 'button red' do
       concat content_tag :span, '', class: 'icon16 cross'
@@ -23,7 +31,7 @@ module ApplicationHelper
   end
 
   def search_button(extra_classes = nil)
-    button(extra_classes) do
+    button(class: extra_classes) do
       concat content_tag :span, '', class: 'glyph search'
       concat 'Search'
     end
@@ -31,8 +39,9 @@ module ApplicationHelper
 
   private
 
-    def button(extra_classes = nil, &block)
-      content_tag :button, class: "button #{extra_classes}" do
+    def button(options = {}, &block)
+      options[:class] = options[:class].try(:concat, ' button') || 'button'
+      content_tag(:button, options) do
         yield
       end
     end

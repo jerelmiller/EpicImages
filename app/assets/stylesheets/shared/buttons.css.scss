@@ -11,6 +11,12 @@
   }
 }
 
+button, .button {
+  &:active, &:focus {
+    outline: 0;
+  }
+}
+
 .button + .button {
   margin-left: 10px;
 }

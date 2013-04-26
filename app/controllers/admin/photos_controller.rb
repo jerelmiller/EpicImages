@@ -3,6 +3,8 @@ class Admin::PhotosController < Admin::AdminController
 
   def index
     @photos = Photo.order('created_at desc')
+    @photo = Photo.new
+    @tags = Tag.all
   end
 
   def new

@@ -1,7 +1,46 @@
-= link_to new_admin_photo_path, class: 'button' do
+/ = link_to new_admin_photo_path, class: 'button' do
+/   %span.icon16.plus
+/   Add new photo
+= link_to '#photoUpload', class: 'button', 'data-toggle' => 'modal' do
   %span.icon16.plus
-  Add new photo
+  Add new photos
+
+#photoUpload.modal.hide.fade
+  .modal-header
+    %h2
+      %span.icon24.plus
+      Add new photos
+  = form_for [:admin, @photo], html: { multipart: true } do |f|
+    .modal-body
+      .input
+        %label Choose Photo
+        = f.file_field :image
+      .input
+        %label Title
+        = f.text_field :title, class: 'inputIcon'
+        %label.icon.inputIcon.bubble
+      .input
+        %label Tags
+        #tagsInput
+      .input.checkbox
+        = f.check_box :featured_flag
+        %label Featured
+    .modal-footer
+      = save_button
+      = cancel_button 'data-dismiss' => 'modal'
 
 %section.photos
   = render @photos
   .clear
+
+:javascript
+  var tags = new EpicImages.Collections.Tags(
+    #{render(partial: 'tags/tags', locals: { tags: @tags }, formats: [:json])}
+  );
+
+  var tagSelectionView = new EpicImages.Views.TagInput({
+    el: '#tagsInput',
+    collection: tags
+  });
+
+  tagSelectionView.render();
