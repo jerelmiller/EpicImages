@@ -37,6 +37,46 @@ select.search {
   &.large {
     width: 500px;
   }
+
+}
+.fileInput {
+  width: 100%;
+  margin-bottom: 20px;
+  label {
+    display: block;
+  }
+  .inputContainer {
+    margin-right: 40px;
+    float: left;
+  }
+}
+.progress {
+  @include border-radius(3px);
+  overflow: hidden;
+  height: 20px;
+  background: #EFEFEF;
+  .bar {
+    background: $blue;
+    width: 0px;
+    height: 20px;
+  }
+  &.global {
+    height: 25px;
+    .bar {
+      height: 25px;
+    }
+  }
+}
+
+.filePicker {
+  opacity: 0;
+  z-index: 100;
+  filter: alpha(opacity = 0);
+  cursor: pointer;
+}
+
+.chooseFile {
+  z-index: 1;
 }
 
 .hint {

@@ -10,3 +10,19 @@
     }
   }
 }
+
+.photoUpload {
+  width: 300px;
+  float: left;
+  margin: 0 0 10px 10px;
+  min-height: 50px;
+
+  &:nth-child(3n + 1) {
+    margin-left: 0;
+  }
+
+  .name {
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+}

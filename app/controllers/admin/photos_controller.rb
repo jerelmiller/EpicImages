@@ -4,20 +4,23 @@ class Admin::PhotosController < Admin::AdminController
   def index
     @photos = Photo.order('created_at desc')
     @photo = Photo.new
-    @tags = Tag.all
+    @tags = Tag.includes{ photos }.all
     @galleries = Tag.gallery
   end
 
   def create
     @photo = Photo.new params[:photo]
     if @photo.save
-      @photo.tags = get_tags
+      # @photo.tags = get_tags
       flash[:success] = "The image has been successfully uploaded"
     else
       flash[:error] = @photo.errors.full_messages.join('<br>')
     end
 
-    redirect_to admin_photos_path
+    respond_to do |format|
+      format.js { render json: @photo }
+      format.html { redirect_to admin_photos_path }
+    end
   end
 
   def edit

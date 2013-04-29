@@ -1,0 +1,21 @@
+.modal-header
+  %h2
+    %span.icon24.plus
+    Add new photos
+.modal-body.extend
+  .fileInput.clearfix
+    .inputContainer
+      %input.filePicker.absolute{ type: 'file', multiple: true, name: 'photo[image]' }
+      %button.button.chooseFile.absolute Choose Photos
+    .global.progress.left.hide
+      .bar
+    %span.uploading.hide Uploading...
+  .photoUploads
+
+.modal-footer
+  %button.button.save
+    %span.glyph.save
+    Save
+  %button.button.red{ 'data-dismiss' => 'modal' }
+    %span.icon16.cross
+    Cancel

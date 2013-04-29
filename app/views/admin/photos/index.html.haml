@@ -1,26 +1,4 @@
 #photoUpload.modal.hide.fade
-  .modal-header
-    %h2
-      %span.icon24.plus
-      Add new photos
-  = form_for [:admin, @photo], html: { multipart: true } do |f|
-    .modal-body.extend
-      .input
-        %label Choose Photo
-        = f.file_field :image
-      .input
-        %label Title
-        = f.text_field :title, class: 'inputIcon'
-        %label.icon.inputIcon.bubble
-      .input
-        %label Tags
-        #tagsInput
-      .input.checkbox
-        = f.check_box :featured_flag
-        %label Featured
-    .modal-footer
-      = save_button
-      = cancel_button 'data-dismiss' => 'modal'
 
 #newGallery.modal.hide.fade
   .modal-header
@@ -94,7 +72,12 @@
     tagData: galleryTags
   });
 
-  tagInputView.render()
+  var addPhotosView = new EpicImages.Views.AddPhotos({
+    el: '#photoUpload'
+  });
+
+  addPhotosView.render();
+  tagInputView.render();
   tagSelectionView.render();
   galleriesView.render();
 
@@ -105,12 +88,12 @@
       $(this).addClass('selected');
       $('.photos, .photoTabs').show()
       $('.galleries, .galleryTabs').hide()
-    })
+    });
     $('#galleriesView').click(function(e) {
       e.preventDefault();
       $('.tab').removeClass('selected');
       $(this).addClass('selected');
       $('.photos, .photoTabs').hide();
       $('.galleries, .galleryTabs').show();
-    })
+    });
   });

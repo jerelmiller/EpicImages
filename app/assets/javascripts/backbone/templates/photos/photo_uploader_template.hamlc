@@ -1,0 +1,15 @@
+.upload
+  %span.name= @name
+  .progress
+    .bar
+.attributes.hide
+  .input
+    %label Title
+    %input.inputIcon{ type: 'text', name: 'title' }
+    / %label.icon.inputIcon.bubble
+  .input
+    %label Tags
+    #tagsInput
+  .input.checkbox
+    %input{ type: 'checkbox', name: 'featured_flag' }
+    %label Featured

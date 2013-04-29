@@ -24,4 +24,6 @@
 //= require backbone
 //= require backbone/epic_images
 //= require hamlcoffee
+//= require jquery-fileupload/basic
+//= require utils
 //= require_tree .

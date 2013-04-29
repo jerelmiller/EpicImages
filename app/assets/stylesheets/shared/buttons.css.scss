@@ -31,7 +31,7 @@ input[type=submit].button, button.button {
 }
 
 a.button, input[type=submit].button, button.button {
-  &:hover {
+  &:hover, &.hover {
     color: white;
     background: lighten($blue, 10%);
   }
