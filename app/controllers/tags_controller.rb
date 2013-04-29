@@ -1,7 +1,7 @@
 class TagsController < ApplicationController
 
   def index
-    @galleries = Tag.gallery
+    @galleries = Tag.gallery.with_photos
     @searchable_tags = Tag.all
   end
 

@@ -9,7 +9,7 @@ class EpicImages.Views.TagGallery extends Backbone.View
     'mouseleave'  : 'onMouseleave'
 
   render: =>
-    @$el.html @template @model.toJSON()
+    @$el.html @template @_viewAttributes()
     @_hideCaption()
     @_waitForImageLoad()
     @
@@ -41,3 +41,15 @@ class EpicImages.Views.TagGallery extends Backbone.View
   _spinnerOpts: =>
     _.extend {},
       lines: 13
+
+  _viewAttributes: =>
+    if @model.get('no_photos')
+      show_link = '#photoUpload'
+      toggle_modal = 'modal'
+    else
+      show_link = @model.get('show_link')
+      toggle_modal = null
+    _.extend {},
+      @model.toJSON()
+      show_link: show_link
+      toggle_modal: toggle_modal

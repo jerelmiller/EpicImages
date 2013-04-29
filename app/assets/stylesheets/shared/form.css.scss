@@ -23,6 +23,9 @@ select.search {
     width: 200px;
     display: block;
     margin-bottom: 5px;
+    &.large {
+      width: 500px;
+    }
   }
   &.checkbox {
     label {
@@ -31,6 +34,15 @@ select.search {
       top: 3px;
     }
   }
+  &.large {
+    width: 500px;
+  }
+}
+
+.hint {
+  font-size: 14px;
+  font-style: italic;
+  width: 500px;
 }
 
 input[type=text], input[type=email], input[type=password], textarea {
@@ -46,5 +58,9 @@ input[type=text], input[type=email], input[type=password], textarea {
   &.inputIcon {
     width: 270px;
     padding-right: 38px;
+  }
+
+  .input.large & {
+    width: 465px;
   }
 }

@@ -12,7 +12,6 @@ class Admin::PhotosController < Admin::AdminController
     @photo = Photo.new params[:photo]
     if @photo.save
       @photo.tags = get_tags
-      configure_galleries
       flash[:success] = "The image has been successfully uploaded"
     else
       flash[:error] = @photo.errors.full_messages.join('<br>')
@@ -31,7 +30,6 @@ class Admin::PhotosController < Admin::AdminController
     path = admin_photos_path
     if @photo.update_attributes(params[:photo])
       @photo.tags = get_tags
-      configure_galleries
       flash[:success] = "The photo has been successfully updated"
     else
       flash[:error] = @photo.errors.full_messages.join('<br/>')
@@ -57,12 +55,6 @@ class Admin::PhotosController < Admin::AdminController
       tags << Tag.where(name: params[:tags].split(',')).all
       tags << params[:tags].split(',').reject{ |tag| tags.flatten.map(&:name).include? tag }.map{ |tag| Tag.create(name: tag.downcase) }
       tags.flatten
-    end
-
-    def configure_galleries
-      logger.debug '================== configure_galleries'
-      Tag.where(name: params[:gallery_tags].split(';')).each{ |tag| tag.update_attributes(gallery_flag: true) }
-      Tag.where{ name << my{ params[:gallery_tags].split(';') }}.each{ |tag| tag.update_attributes(gallery_flag: false) }
     end
 
     def load_photo

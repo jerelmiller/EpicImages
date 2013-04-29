@@ -7,7 +7,11 @@ class Tag < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   def self.gallery
-    joins{ gallery_photo }.where gallery_flag: true
+    where gallery_flag: true
+  end
+
+  def self.with_photos
+    joins{ photos }
   end
 
   def self.destroy_unused!

@@ -18,13 +18,24 @@
       .input.checkbox
         = f.check_box :featured_flag
         %label Featured
-      .divider
-      .input
-        %label Make tags a gallery
-        #galleryInput
     .modal-footer
       = save_button
       = cancel_button 'data-dismiss' => 'modal'
+
+#newGallery.modal.hide.fade
+  .modal-header
+    %h2
+      %span.icon24.plus
+      Add a gallery
+  = form_tag admin_tags_path(gallery: true), html: { multipart: true } do |f|
+    .modal-body
+      .input.large
+        %label.large Create galleries from existing tags or create a new one
+        #galleryInput
+        %span.hint You will be able to edit photos on the gallery edit page
+      .modal-footer
+        = save_button
+        = cancel_button 'data-dismiss' => 'modal'
 
 .tabbedContainer
   .tabHeader
@@ -36,9 +47,9 @@
       %span.glyph.images
       Photos
     .actions.absolute.galleryTabs.hide
-      = link_to '#photoUpload', class: 'button right', 'data-toggle' => 'modal' do
+      = link_to '#newGallery', class: 'button right', 'data-toggle' => 'modal' do
         %span.icon16.plus
-        Edit Gallery
+        Add a gallery
     %h1.sectionTitle.galleryTabs.hide
       %span.glyph.images
       Galleries
@@ -77,11 +88,10 @@
     collection: tags
   });
 
-  var tagSelectionView = new EpicImages.Views.TagSelection({
+  var tagSelectionView = new EpicImages.Views.TagInput({
     el: '#galleryInput',
     collection: tags,
-    tagData: galleryTags,
-    fieldName: 'gallery_tags'
+    tagData: galleryTags
   });
 
   tagInputView.render()
@@ -89,13 +99,15 @@
   galleriesView.render();
 
   $(document).ready(function() {
-    $('#photosView').click(function() {
+    $('#photosView').click(function(e) {
+      e.preventDefault();
       $('.tab').removeClass('selected');
       $(this).addClass('selected');
       $('.photos, .photoTabs').show()
       $('.galleries, .galleryTabs').hide()
     })
-    $('#galleriesView').click(function() {
+    $('#galleriesView').click(function(e) {
+      e.preventDefault();
       $('.tab').removeClass('selected');
       $(this).addClass('selected');
       $('.photos, .photoTabs').hide();

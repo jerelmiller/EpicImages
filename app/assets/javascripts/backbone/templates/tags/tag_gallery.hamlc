@@ -1,4 +1,9 @@
-%a{ href: @show_link }
+%a{ href: @show_link, 'data-toggle' => @toggle_modal }
   .imageWrapper
-    %img{ src: @src, alt: @name, title: @name }
+    - if @src
+      %img{ src: @src, alt: @name, title: @name }
+    - else
+      .placeholder
+        %span.icon24.plus
+        Add photos
     .caption= _.str.titleize @name

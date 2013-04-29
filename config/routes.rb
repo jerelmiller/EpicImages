@@ -15,7 +15,7 @@ EpicImages::Application.routes.draw do
     resource :users, only: [:edit, :update]
     resources :photos, except: [:new, :show]
     resources :blogs
-    resources :tags, path: 'galleries'
+    resources :tags, path: 'galleries', only: [:show, :create]
     root :to => 'admin#index'
   end
 

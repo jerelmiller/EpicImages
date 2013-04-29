@@ -19,10 +19,19 @@
   overflow: hidden;
   position: relative;
   background: #EFEFEF;
+  .placeholder {
+    height: 200px;
+    width: 300px;
+    background: #EFEFEF;
+    font-size: 24px;
+    line-height: 200px;
+    text-align: center;
+  }
   img {
     display: none;
   }
 }
+
 
 .caption {
   position: relative;
