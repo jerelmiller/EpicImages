@@ -1,0 +1,2 @@
+.photo{ style: "height: #{@height}px"}
+  %img{ src: @thumb, alt: @caption }

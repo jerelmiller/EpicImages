@@ -6,11 +6,13 @@
   .fileInput.clearfix
     .inputContainer
       %input.filePicker.absolute{ type: 'file', multiple: true, name: 'photo[image]' }
-      %button.button.chooseFile.absolute Choose Photos
+      %button.button.chooseFile.absolute
+        %span.glyph.upload
+        Choose Photos
     .global.progress.left.hide
       .bar
     %span.uploading.hide Uploading...
-  .photoUploads
+  .photoUploads.clearfix
 
 .modal-footer
   %button.button.save

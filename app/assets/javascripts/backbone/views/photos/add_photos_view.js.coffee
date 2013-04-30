@@ -5,6 +5,7 @@ class EpicImages.Views.AddPhotos extends Backbone.View
     'click .save'            : 'save'
     'mouseover .filePicker'  : 'addHover'
     'mouseleave .filePicker' : 'removeHover'
+    'blur .filePicker'       : 'removeHover'
 
   initialize: =>
     @$el.modal
@@ -12,9 +13,13 @@ class EpicImages.Views.AddPhotos extends Backbone.View
       backdrop: 'static'
       show: false
 
+    @_calculateGlobalProgress = _.debounce @_calculateGlobalProgress, 100
+    @_recalculateLayout = _.debounce @_recalculateLayout, 500
+
     @$el.on 'shown', @_styleFileInput
     @$el.on 'showProgressBar', '.photoUploads', @_showProgressBar
     @$el.on 'finishedUploading', '.photoUploads', @_hideUploadingText
+    @$el.on 'recalculateLayout', '.photoUploads', @_recalculateLayout
 
   render: =>
     @$el.html @template()
@@ -39,7 +44,7 @@ class EpicImages.Views.AddPhotos extends Backbone.View
       height: "#{height}px"
     @$('.fileInput').css 'height', "#{height}px"
 
-    progressWidth = @$('.modal-body').width() - @$('.inputContainer').outerWidth() - 40
+    progressWidth = @$('.modal-body').width() - @$('.inputContainer').width() - 50
     @$('.progress.global').css 'width', "#{progressWidth}px"
 
   _calculateGlobalProgress: (progress) =>
@@ -51,6 +56,13 @@ class EpicImages.Views.AddPhotos extends Backbone.View
 
   _hideUploadingText: =>
     @$('.uploading').hide()
+
+  _recalculateLayout: =>
+    _.defer =>
+      @$('.photoUploads').masonry 'destroy'
+      @$('.photoUploads').masonry
+        itemSelector: '.photoUpload'
+        isAnimated: true
 
   save: =>
     console.log 'save clicked'

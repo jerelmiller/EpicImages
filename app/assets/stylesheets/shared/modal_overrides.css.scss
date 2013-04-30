@@ -5,12 +5,13 @@
   @include border-radius(3px);
   width: 920px;
   margin-left: -480px;
-  padding: 20px;
+  padding: 15px;
 }
 
 .modal-header {
   border-bottom: 1px dashed $lightGreen;
   padding: 0 0 10px 0;
+  margin: 5px;
   margin-bottom: 20px;
 }
 
@@ -23,7 +24,7 @@
 
 .modal-footer {
   text-align: left;
-  padding: 20px 0 0 0;
+  padding: 20px 5px 0;
   border-top: 1px dashed $lightGreen;
   background: none;
 }

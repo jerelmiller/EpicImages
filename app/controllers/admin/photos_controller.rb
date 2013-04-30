@@ -9,17 +9,19 @@ class Admin::PhotosController < Admin::AdminController
   end
 
   def create
-    @photo = Photo.new params[:photo]
-    if @photo.save
-      # @photo.tags = get_tags
-      flash[:success] = "The image has been successfully uploaded"
-    else
-      flash[:error] = @photo.errors.full_messages.join('<br>')
-    end
+    ActiveRecord::Base.transaction do
+      @photo = Photo.new params[:photo]
+      if @photo.save
+        # @photo.tags = get_tags
+        flash[:success] = "The image has been successfully uploaded"
+      else
+        flash[:error] = @photo.errors.full_messages.join('<br>')
+      end
 
-    respond_to do |format|
-      format.js { render json: @photo }
-      format.html { redirect_to admin_photos_path }
+      respond_to do |format|
+        format.json
+        format.html { redirect_to admin_photos_path }
+      end
     end
   end
 

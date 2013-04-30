@@ -1,4 +1,5 @@
 @import 'colors';
+@import 'mixins';
 
 span.icon16 {
   font: {
@@ -44,23 +45,23 @@ span.icon16 {
   }
 }
 
-[class^="icon16-"], [class*=" icon16-"] {
-  font: {
-    family: Icon !important;
-    size: 16px;
-  }
-  &.red {
-    color: $red;
-  }
-  .button & {
-    position: relative;
-    top: 2px;
-    margin-right: 5px;
-    &.plus {
-      top: 1px;
-    }
-  }
-}
+// [class^="icon16-"], [class*=" icon16-"] {
+//   font: {
+//     family: Icon !important;
+//     size: 16px;
+//   }
+//   &.red {
+//     color: $red;
+//   }
+//   .button & {
+//     position: relative;
+//     top: 2px;
+//     margin-right: 5px;
+//     &.plus {
+//       top: 1px;
+//     }
+//   }
+// }
 
 span.icon24 {
   @extend span.icon16;
@@ -82,6 +83,12 @@ label.icon {
     position: absolute;
     right: 35px;
     top: 39px;
+  }
+
+  .attributes & {
+    right: 14px;
+    top: 10px;
+    color: #CCC;
   }
 }
 
@@ -114,6 +121,25 @@ span.glyph {
   }
   &.images:after {
     content: "\f09f";
+  }
+  &.redo:after {
+    content: "\f32b";
+  }
+  &.upload:after {
+    content: "\f11b";
+  }
+  &.check {
+    height: 10px;
+    width: 10px;
+    border: 2px solid #666;
+    @include border-radius(1px);
+    display: inline-block;
+  }
+  &.checked {
+    color: $green;
+    &:after {
+      content: "\f310";
+    }
   }
 }
 

@@ -40,14 +40,15 @@ select.search {
 
 }
 .fileInput {
-  width: 100%;
   margin-bottom: 20px;
+  padding: 0 5px;
   label {
     display: block;
   }
   .inputContainer {
     margin-right: 40px;
     float: left;
+    min-height: 40px;
   }
 }
 .progress {
@@ -102,5 +103,42 @@ input[type=text], input[type=email], input[type=password], textarea {
 
   .input.large & {
     width: 465px;
+  }
+
+  .attributes & {
+    width: 252px;
+    border: 0;
+    border-bottom: 1px solid #CCC;
+    resize: none;
+    font-size: 13px;
+    @include border-radius(0);
+    &:focus {
+      outline: none;
+      @include box-shadow(0, 0, 0, 0);
+    }
+  }
+}
+
+.attributesContainer {
+  border: 1px solid #CCC;
+}
+
+.attributes {
+  width: 298px;
+  position: relative;
+
+  .featured {
+    padding: 5px;
+    input[type=checkbox] {
+      position: absolute;
+      top: 8px;
+      z-index: 100;
+      opacity: 0;
+      filter: alpha(opacity = 0);
+    }
+    .glyph {
+      position: relative;
+      top: 2px;
+    }
   }
 }

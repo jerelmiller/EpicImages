@@ -12,7 +12,6 @@ class EpicImages.Views.FileUploader extends Backbone.View
 
   renderPhoto: (photo) =>
     photoView = new EpicImages.Views.AddedPhoto
-      id: photo.get('name')
       model: photo
 
     @$el.append photoView.render().el
@@ -29,27 +28,38 @@ class EpicImages.Views.FileUploader extends Backbone.View
       progress: @_calculateProgress
       done: @_finishedUploading
       change: @_showGlobalProgressBar
+      fail: @_renderFailed
 
   _addFile: (e, image) =>
     newPhoto = new EpicImages.Models.Photo()
+    image._id = @collection.length
     newPhoto.set 'image', image
-
     @collection.add newPhoto
+    @$el.trigger 'recalculateLayout'
 
   _calculateProgress: (e, image) =>
     progress = parseInt(image.loaded / image.total * 100, 10)
     progress = 95 if progress > 95
-    @_findSubviewFor(image.files[0].name).setProgress progress
+    @_findSubviewFor(image._id).setProgress progress
 
   _finishedUploading: (e, image) =>
-    @_findSubviewFor(image.files[0].name).renderFinished()
+    view = @_findSubviewFor(image._id)
+    view.model.set @_completedPhotoAttrs(image)
+    view.setProgress 100
     @$el.trigger 'finishedUploading' if @collection.isAllFinished()
+    @$el.trigger 'recalculateLayout'
+
+  _renderFailed: (e, image) =>
+    view = @_findSubviewFor(image._id)
+    view.renderFailed()
+    view.model.set 'progress', 99
+    @$el.trigger 'recalculateLayout'
 
   _showGlobalProgressBar: =>
     @$el.trigger 'showProgressBar'
 
   _findSubviewFor: (id) =>
-    _.chain(@subviews).where(id: id).first().value()
+    _.chain(@subviews).filter((subview) => subview.model.get('image')._id == id).first().value()
 
   _bindListeners: =>
     @listenTo @collection, 'add', @renderPhoto
@@ -57,3 +67,6 @@ class EpicImages.Views.FileUploader extends Backbone.View
 
   _calculateGlobalProgress: =>
     @options.globalProgressCallback @collection.averageProgress()
+
+  _completedPhotoAttrs: (image) =>
+    JSON.parse(image.jqXHR.responseText)

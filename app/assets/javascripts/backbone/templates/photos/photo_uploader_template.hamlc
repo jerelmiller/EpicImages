@@ -2,14 +2,22 @@
   %span.name= @name
   .progress
     .bar
-.attributes.hide
-  .input
-    %label Title
-    %input.inputIcon{ type: 'text', name: 'title' }
-    / %label.icon.inputIcon.bubble
-  .input
-    %label Tags
-    #tagsInput
-  .input.checkbox
-    %input{ type: 'checkbox', name: 'featured_flag' }
-    %label Featured
+%button.button.resubmit.hide
+  %span.glyph.redo
+  Resubmit
+.attributesContainer.hide
+  / .input
+  .attributes
+    / %label Caption
+    %textarea.inputIcon{ name: 'photo[title]', placeholder: 'Say something about this photo...', rows: 4 }
+    %label.icon.inputIcon.bubble
+    .featured.relative
+      %input.isFeatured{ type: 'checkbox', name: 'photo[featured_flag]' }
+      %span.glyph.check
+      %label Featured
+  / .input
+  /   %label Tags
+  /   #tagsInput
+  / .input.checkbox
+  /   %input{ type: 'checkbox', name: 'featured_flag' }
+  /   %label Featured
