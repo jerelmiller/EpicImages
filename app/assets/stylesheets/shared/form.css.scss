@@ -94,7 +94,7 @@ input[type=text], input[type=email], input[type=password], textarea {
   width: 300px;
   &:focus {
     outline: none;
-    @include box-shadow(0, 0, 3px, 1px, #CCC);
+    @include box-shadow(0 0 3px 1px #CCC);
   }
   &.inputIcon {
     width: 270px;
@@ -114,7 +114,7 @@ input[type=text], input[type=email], input[type=password], textarea {
     @include border-radius(0);
     &:focus {
       outline: none;
-      @include box-shadow(0, 0, 0, 0);
+      @include box-shadow(none);
     }
   }
 }
@@ -128,7 +128,7 @@ input[type=text], input[type=email], input[type=password], textarea {
   position: relative;
 
   .featured {
-    padding: 5px;
+    background: #EFEFEF;
     input[type=checkbox] {
       position: absolute;
       top: 8px;
@@ -140,5 +140,15 @@ input[type=text], input[type=email], input[type=password], textarea {
       position: relative;
       top: 2px;
     }
+  }
+}
+.selectable {
+  float: left;
+  line-height: 16px;
+  padding: 8px;
+  border-right: 1px solid #CCC;
+  input[type=checkbox] {
+    height: 16px;
+    width: 16px;
   }
 }

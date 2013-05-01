@@ -1,16 +1,34 @@
 @import 'shared/colors';
 @import 'shared/mixins';
 
+.select2-container.inputIcon {
+  padding-right: 38px;
+
+  .attributes & {
+    border-bottom: 1px solid #CCC !important;
+  }
+}
+
 .select2-choices {
   padding: 3px 5px 0 !important;
   line-height: 35px !important;
   border: 1px solid #CCC !important;
   background-image: none !important;
+  .attributes & {
+    font-size: 13px !important;
+    border: 0 !important;
+    line-height: normal !important;
+    @include box-shadow(none !important);
+  }
 }
 
 .select2-search-field {
   position: relative !important;
   top: -3px !important;
+
+  .attributes & {
+    top: -1px !important;
+  }
 
   input {
     font-family: Nexa, Helvetica, sans-serif !important;
@@ -26,7 +44,7 @@
     image: none !important;
   }
 
-  @include box-shadow(0, 0, 0, 0, null, null, !important);
+  @include box-shadow(none !important);
 
   a {
     display: inline !important;

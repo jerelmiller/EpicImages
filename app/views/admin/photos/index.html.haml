@@ -61,11 +61,6 @@
     collection: galleryTags
   });
 
-  var tagInputView = new EpicImages.Views.TagInput({
-    el: '#tagsInput',
-    collection: tags
-  });
-
   var tagSelectionView = new EpicImages.Views.TagInput({
     el: '#galleryInput',
     collection: tags,
@@ -73,11 +68,11 @@
   });
 
   var addPhotosView = new EpicImages.Views.AddPhotos({
-    el: '#photoUpload'
+    el: '#photoUpload',
+    tags: tags
   });
 
   addPhotosView.render();
-  tagInputView.render();
   tagSelectionView.render();
   galleriesView.render();
 

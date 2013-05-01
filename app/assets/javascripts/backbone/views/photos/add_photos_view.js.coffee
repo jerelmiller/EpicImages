@@ -1,11 +1,12 @@
 class EpicImages.Views.AddPhotos extends Backbone.View
   template: JST['backbone/templates/photos/add_photos_template']
+  modalOverlay: JST['backbone/templates/modals/modal_overlay']
 
   events:
-    'click .save'            : 'save'
-    'mouseover .filePicker'  : 'addHover'
-    'mouseleave .filePicker' : 'removeHover'
-    'blur .filePicker'       : 'removeHover'
+    'click .save:not(.disabled)'  : 'save'
+    'mouseover .filePicker'       : 'addHover'
+    'mouseleave .filePicker'      : 'removeHover'
+    'blur .filePicker'            : 'removeHover'
 
   initialize: =>
     @$el.modal
@@ -15,10 +16,14 @@ class EpicImages.Views.AddPhotos extends Backbone.View
 
     @_calculateGlobalProgress = _.debounce @_calculateGlobalProgress, 100
     @_recalculateLayout = _.debounce @_recalculateLayout, 500
+    @collection = new EpicImages.Collections.Photos()
+
+    @_bindListeners()
 
     @$el.on 'shown', @_styleFileInput
     @$el.on 'showProgressBar', '.photoUploads', @_showProgressBar
     @$el.on 'finishedUploading', '.photoUploads', @_hideUploadingText
+    @$el.on 'finishedUploading', '.photoUploads', @_enableSaveButton
     @$el.on 'recalculateLayout', '.photoUploads', @_recalculateLayout
 
   render: =>
@@ -27,9 +32,16 @@ class EpicImages.Views.AddPhotos extends Backbone.View
       el: '.photoUploads'
       fileElement: @$('input[type=file]')
       globalProgressCallback: @_calculateGlobalProgress
+      tags: @options.tags
+      collection: @collection
 
     @fileUploader.render()
     @
+
+  save: =>
+    @$el.spin()
+    @$el.append @modalOverlay()
+    @collection.save()
 
   addHover: =>
     @$('.chooseFile').addClass 'hover'
@@ -64,5 +76,11 @@ class EpicImages.Views.AddPhotos extends Backbone.View
         itemSelector: '.photoUpload'
         isAnimated: true
 
-  save: =>
-    console.log 'save clicked'
+  _disableSaveButton: =>
+    @$('.save').addClass 'disabled'
+
+  _enableSaveButton: =>
+    @$('.save').removeClass 'disabled'
+
+  _bindListeners: =>
+    @listenTo @collection, 'add', @_disableSaveButton

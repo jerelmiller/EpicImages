@@ -6,15 +6,24 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
     class: 'photoUpload'
 
   events:
+    'keyup .captionInput'    : 'setCaption'
     'click .resubmit'        : 'resubmit'
     'click input.isFeatured' : 'updateFeatured'
 
   initialize: =>
     @_bindListeners()
+    @setCaption = _.debounce @setCaption, 100
 
   render: =>
     @$el.html @template @_viewAttributes()
+    @$('.tip').tooltip
+      delay:
+        show: 800
+        hide: 0
     @
+
+  setCaption: (e) =>
+    @model.set 'caption', @$(e.target).val()
 
   submitImage: =>
     @model.submitImage()
@@ -24,6 +33,7 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
 
   renderComplete: =>
     @_showImage()
+    @_renderTagsInput()
     @$('.upload').hide()
     @$('.attributesContainer').show()
 
@@ -38,6 +48,7 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
     @model.get('image').submit()
 
   updateFeatured: (e) =>
+    @$(e.target).tooltip('hide')
     @model.set 'featured_flag', @$(e.target).is(':checked')
 
   _restartProgress: =>
@@ -49,13 +60,25 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
     @listenTo @model, 'finishedUploading', @renderComplete
     @listenTo @model, 'change:featured_flag', @_changeChecked
 
+  _renderTagsInput: =>
+    tagInputView = new EpicImages.Views.TagInput
+      el: '.tagsInput'
+      collection: @options.tags
+
+    tagInputView.render()
+    tagInputView.registerChangeCallback @_updatePhotoTags
+
+  _updatePhotoTags: (tags) =>
+    @model.set 'tags', tags
+    window.photo = @model
+
   _renderProgress: =>
     @$('.bar').animate
       width: "#{@model.get('progress')}%"
 
   _changeChecked: =>
-    return @$('.check').removeClass('check').addClass 'checked' if @model.get 'featured_flag'
-    @$('.checked').removeClass('checked').addClass 'check'
+    return @$('.heart').addClass 'red' if @model.get 'featured_flag'
+    @$('.heart').removeClass 'red'
 
   _viewAttributes: =>
       _.extend {},

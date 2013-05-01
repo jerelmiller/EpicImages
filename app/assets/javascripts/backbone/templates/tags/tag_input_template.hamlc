@@ -1,1 +1,2 @@
-%input#tags{ name: 'tags', type: 'text' }
+%input.inputIcon#tags{ name: 'tags', type: 'text' }
+%label.glyph.inputIcon.tags

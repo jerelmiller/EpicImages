@@ -3,7 +3,6 @@ class EpicImages.Views.FileUploader extends Backbone.View
   initialize: =>
     @$fileElement = @options.fileElement
     @subviews = []
-    @collection = new EpicImages.Collections.Photos()
     @_bindListeners()
 
   render: =>
@@ -13,6 +12,7 @@ class EpicImages.Views.FileUploader extends Backbone.View
   renderPhoto: (photo) =>
     photoView = new EpicImages.Views.AddedPhoto
       model: photo
+      tags: @options.tags
 
     @$el.append photoView.render().el
 

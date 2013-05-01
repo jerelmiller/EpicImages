@@ -1,7 +1,7 @@
 class Photo < ActiveRecord::Base
   has_and_belongs_to_many :tags
 
-  attr_accessible :title, :image, :featured_flag
+  attr_accessible :caption, :image, :featured_flag
 
   after_commit :destroy_unused_tags
 

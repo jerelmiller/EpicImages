@@ -20,4 +20,8 @@
   .select2-search-choice-focus & {
     background: darken($red, 15%);
   }
+
+  .attributes & {
+    padding: 3px 5px 6px;
+  }
 }

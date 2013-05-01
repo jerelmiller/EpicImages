@@ -12,7 +12,6 @@ class Admin::PhotosController < Admin::AdminController
     ActiveRecord::Base.transaction do
       @photo = Photo.new params[:photo]
       if @photo.save
-        # @photo.tags = get_tags
         flash[:success] = "The image has been successfully uploaded"
       else
         flash[:error] = @photo.errors.full_messages.join('<br>')
@@ -34,13 +33,22 @@ class Admin::PhotosController < Admin::AdminController
   def update
     path = admin_photos_path
     if @photo.update_attributes(params[:photo])
-      @photo.tags = get_tags
+      @photo.tags = get_tags param[:tags].split(',')
       flash[:success] = "The photo has been successfully updated"
     else
       flash[:error] = @photo.errors.full_messages.join('<br/>')
       path = edit_admin_photo_path(@photo)
     end
     redirect_to path
+  end
+
+  def update_all
+    @photos = Photo.where(id: params[:photos].map{ |param| param[:id] }).all
+    filtered_params[:photos].each do |photo_params|
+      photo = @photos.select{ |photo| photo.id.eql? photo_params[:id].to_i }.first
+      photo.update_attributes photo_params.except :id, :tags
+      photo.tags = get_tags photo_params[:tags]
+    end
   end
 
   def destroy
@@ -55,10 +63,28 @@ class Admin::PhotosController < Admin::AdminController
 
   private
 
-    def get_tags
+    def filtered_params
+      filtered_params = {}
+      if params[:photos].present?
+        filtered_params.merge!(
+          photos: params[:photos].map do |photo|
+            tags = photo[:tags].presence || []
+            {
+              id: photo[:id],
+              caption: photo[:caption],
+              featured_flag: photo[:featured_flag],
+              tags: tags.map{ |tag| tag[:name] }
+            }
+          end
+        )
+      end
+      filtered_params
+    end
+
+    def get_tags(tag_params)
       tags = []
-      tags << Tag.where(name: params[:tags].split(',')).all
-      tags << params[:tags].split(',').reject{ |tag| tags.flatten.map(&:name).include? tag }.map{ |tag| Tag.create(name: tag.downcase) }
+      tags << Tag.where(name: tag_params).all
+      tags << tag_params.reject{ |tag| tags.flatten.map(&:name).include? tag }.map{ |tag| Tag.create(name: tag.downcase) }
       tags.flatten
     end
 

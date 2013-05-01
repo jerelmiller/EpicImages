@@ -6,6 +6,7 @@ span.icon16 {
     family: Icon !important;
     size: 16px;
   }
+  line-height: 16px;
   &.mail:after {
     content: "\e008";
   }
@@ -26,6 +27,9 @@ span.icon16 {
   }
   &.man:after {
     content: "\e007";
+  }
+  &.heart:after {
+    content: "\e00b"
   }
   .sectionTitle & {
     position: relative;
@@ -69,6 +73,7 @@ span.icon24 {
     weight: bold;
     size: 24px;
   }
+  line-height: 24px;
   &.plus:after {
     content: "\e003";
   }
@@ -128,18 +133,8 @@ span.glyph {
   &.upload:after {
     content: "\f11b";
   }
-  &.check {
-    height: 10px;
-    width: 10px;
-    border: 2px solid #666;
-    @include border-radius(1px);
-    display: inline-block;
-  }
-  &.checked {
-    color: $green;
-    &:after {
-      content: "\f310";
-    }
+  &.tags:after {
+    content: "\f482";
   }
 }
 
@@ -147,5 +142,24 @@ h1 {
   span.glyph {
     font-size: 24px;
     margin-right: 5px;
+  }
+}
+
+label.glyph {
+  width: 16px;
+  display: inline-block;
+  font-size: 16px;
+  @extend span.glyph;
+  &.inputIcon {
+    color: $blue;
+    position: absolute;
+    right: 35px;
+    top: 39px;
+  }
+
+  .attributes & {
+    right: 14px;
+    top: 7px;
+    color: #CCC;
   }
 }

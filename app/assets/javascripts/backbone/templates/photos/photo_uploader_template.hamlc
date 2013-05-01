@@ -6,18 +6,13 @@
   %span.glyph.redo
   Resubmit
 .attributesContainer.hide
-  / .input
   .attributes
-    / %label Caption
-    %textarea.inputIcon{ name: 'photo[title]', placeholder: 'Say something about this photo...', rows: 4 }
+    %textarea.inputIcon.captionInput{ placeholder: 'Say something about this photo...', rows: 4 }
     %label.icon.inputIcon.bubble
+    .tags.relative
+      .tagsInput
     .featured.relative
-      %input.isFeatured{ type: 'checkbox', name: 'photo[featured_flag]' }
-      %span.glyph.check
-      %label Featured
-  / .input
-  /   %label Tags
-  /   #tagsInput
-  / .input.checkbox
-  /   %input{ type: 'checkbox', name: 'featured_flag' }
-  /   %label Featured
+      .selectable
+        %input.isFeatured.tip{ type: 'checkbox', 'data-title' => 'Make featured photo', 'data-placement' => 'right' }
+        %span.icon16.heart
+      .clear
