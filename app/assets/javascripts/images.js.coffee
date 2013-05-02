@@ -15,5 +15,6 @@ $ ->
     $(@).spin false
     $image.fadeIn()
 
-  $('.photos').masonry
-    itemSelector: '.photo'
+  unless $('.photos').is(':empty')
+    $('.photos').masonry
+      itemSelector: '.photo'

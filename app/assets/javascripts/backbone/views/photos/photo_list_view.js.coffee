@@ -1,4 +1,5 @@
 class EpicImages.Views.PhotoList extends Backbone.View
+  noPhotos: JST['backbone/templates/photos/no_photos_template']
 
   initialize: =>
     @listenTo @collection, 'sync', @onSync
@@ -6,7 +7,8 @@ class EpicImages.Views.PhotoList extends Backbone.View
   render: =>
     @$el.empty()
     @collection.each @addOne
-    @$el.append '<div class="clear"></div>'
+    _.defer => @$el.append @noPhotos() if @collection.isEmpty()
+    @$el.append '<div class="clear"></div>' unless @collection.isEmpty()
     @
 
   addOne: (photo) =>
