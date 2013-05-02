@@ -14,9 +14,13 @@ class Tag < ActiveRecord::Base
     joins{ photos }
   end
 
+  def gallery?
+    gallery_flag
+  end
+
   def self.destroy_unused!
     ActiveRecord::Base.transaction do
-      includes{ photos }.select{ |tag| tag.photos.length < 1 }.map(&:destroy)
+      includes{ photos }.select{ |tag| tag.photos.length < 1 && !tag.gallery? }.map(&:destroy)
     end
   end
 

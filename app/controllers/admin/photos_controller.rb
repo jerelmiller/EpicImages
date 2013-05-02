@@ -33,7 +33,7 @@ class Admin::PhotosController < Admin::AdminController
   def update
     path = admin_photos_path
     if @photo.update_attributes(params[:photo])
-      @photo.tags = get_tags param[:tags].split(',')
+      @photo.tags = get_tags params[:tags].split(',')
       flash[:success] = "The photo has been successfully updated"
     else
       flash[:error] = @photo.errors.full_messages.join('<br/>')
@@ -62,6 +62,10 @@ class Admin::PhotosController < Admin::AdminController
       flash[:error] = "There was a problem deleting the photo. Please try again"
       redirect_to request.referer
     end
+  end
+
+  def all_photos
+    @photos = Photo.order('id desc')
   end
 
   private

@@ -47,6 +47,7 @@ class EpicImages.Views.AddPhotos extends Backbone.View
     @removeLoading()
     @$el.modal 'hide'
     @$el.on 'hidden', @resetView
+    _.delay(=> @trigger 'saved', 200)
 
   renderError: =>
     @removeLoading()

@@ -14,7 +14,10 @@ EpicImages::Application.routes.draw do
   namespace :admin do
     resource :users, only: [:edit, :update]
     resources :photos, except: [:new, :show] do
-      put :update_all, on: :collection
+      collection do
+        put :update_all
+        get :all_photos
+      end
     end
     resources :blogs
     resources :tags, path: 'galleries', only: [:show, :create]

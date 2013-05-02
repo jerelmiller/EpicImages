@@ -1,5 +1,6 @@
 class EpicImages.Collections.Photos extends Backbone.Collection
   model: EpicImages.Models.Photo
+  url: '/admin/photos/all_photos'
 
   averageProgress: =>
     modelProgress = @models.reduce (memo, photo) =>

@@ -11,7 +11,6 @@ class EpicImages.Views.TagInput extends Backbone.View
     @$el.html @template _.extend {}, @options, tags: @collection.models, searchedTags: @options.tagData
 
     @addSelect2()
-    @updateView()
 
   registerChangeCallback: (callback) =>
     @callback = callback
@@ -26,6 +25,7 @@ class EpicImages.Views.TagInput extends Backbone.View
         placeholder: "Add some tags..."
 
       @$('input#tags').on 'change', @changeCollection
+      @updateView()
 
   updateView: =>
     if @options.tagData
