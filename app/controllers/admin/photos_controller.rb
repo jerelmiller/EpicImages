@@ -46,6 +46,7 @@ class Admin::PhotosController < Admin::AdminController
     @photos = Photo.where(id: params[:photos].map{ |param| param[:id] }).all
     filtered_params[:photos].each do |photo_params|
       photo = @photos.select{ |photo| photo.id.eql? photo_params[:id].to_i }.first
+      photo.skip_checking_tags = true
       photo.update_attributes photo_params.except :id, :tags
       photo.tags = get_tags photo_params[:tags]
     end

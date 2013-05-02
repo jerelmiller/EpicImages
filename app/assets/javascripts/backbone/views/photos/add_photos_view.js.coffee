@@ -41,7 +41,18 @@ class EpicImages.Views.AddPhotos extends Backbone.View
   save: =>
     @$el.spin()
     @$el.append @modalOverlay()
-    @collection.save()
+    @collection.save success: @onSaveSuccess
+
+  onSaveSuccess: =>
+    @$('.modal-overlay').remove()
+    @$el.spin false
+    @$el.modal 'hide'
+    @$el.on 'hidden', @resetView
+
+  resetView: =>
+    @fileUploader.remove()
+    @collection.reset()
+    @render()
 
   addHover: =>
     @$('.chooseFile').addClass 'hover'
@@ -71,7 +82,7 @@ class EpicImages.Views.AddPhotos extends Backbone.View
 
   _recalculateLayout: =>
     _.defer =>
-      @$('.photoUploads').masonry 'destroy'
+      @$('.photoUploads').masonry 'destroy' if @$('.photoUploads').data 'masonry'
       @$('.photoUploads').masonry
         itemSelector: '.photoUpload'
         isAnimated: true

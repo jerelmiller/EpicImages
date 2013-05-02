@@ -17,5 +17,6 @@ class EpicImages.Collections.Photos extends Backbone.Collection
     _.extend {},
       photos: @map (model) => model.toJSON(options)
 
-  save: =>
-    @sync 'update', @, url: "/admin/photos/update_all"
+  save: (options) =>
+    options = _.extend url: "/admin/photos/update_all", options
+    @sync 'update', @, options

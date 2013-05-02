@@ -16,10 +16,11 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
 
   render: =>
     @$el.html @template @_viewAttributes()
-    @$('.tip').tooltip
+    @$('.tip').tooltip({
       delay:
         show: 800
         hide: 0
+    }).on 'hidden', (e) => e.stopPropagation() # fix to prevent bubbling to modal
     @
 
   setCaption: (e) =>
@@ -70,7 +71,6 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
 
   _updatePhotoTags: (tags) =>
     @model.set 'tags', tags
-    window.photo = @model
 
   _renderProgress: =>
     @$('.bar').animate

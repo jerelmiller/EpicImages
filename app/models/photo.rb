@@ -2,6 +2,7 @@ class Photo < ActiveRecord::Base
   has_and_belongs_to_many :tags
 
   attr_accessible :caption, :image, :featured_flag
+  attr_accessor :skip_checking_tags
 
   after_commit :destroy_unused_tags
 
@@ -21,6 +22,6 @@ class Photo < ActiveRecord::Base
   private
 
     def destroy_unused_tags
-      Tag.destroy_unused!
+      Tag.destroy_unused! unless skip_checking_tags
     end
 end
