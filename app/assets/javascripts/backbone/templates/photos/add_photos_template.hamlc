@@ -2,6 +2,7 @@
   %h2
     %span.icon24.plus
     Add new photos
+  .alertMessage
 .modal-body.extend
   .fileInput.clearfix
     .inputContainer

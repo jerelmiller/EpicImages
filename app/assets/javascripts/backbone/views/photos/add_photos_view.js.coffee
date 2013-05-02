@@ -1,6 +1,7 @@
 class EpicImages.Views.AddPhotos extends Backbone.View
   template: JST['backbone/templates/photos/add_photos_template']
   modalOverlay: JST['backbone/templates/modals/modal_overlay']
+  error: JST['backbone/templates/alerts/error']
 
   events:
     'click .save:not(.disabled)'  : 'save'
@@ -39,15 +40,25 @@ class EpicImages.Views.AddPhotos extends Backbone.View
     @
 
   save: =>
-    @$el.spin()
-    @$el.append @modalOverlay()
-    @collection.save success: @onSaveSuccess
+    @showLoading()
+    @collection.save success: @onSaveSuccess, error: @renderError
 
   onSaveSuccess: =>
-    @$('.modal-overlay').remove()
-    @$el.spin false
+    @removeLoading()
     @$el.modal 'hide'
     @$el.on 'hidden', @resetView
+
+  renderError: =>
+    @removeLoading()
+    @$('.alertMessage').html @error text: "There was an error while saving. Please try again"
+
+  showLoading: =>
+    @$el.spin()
+    @$el.append @modalOverlay()
+
+  removeLoading: =>
+    @$('.modal-overlay').remove()
+    @$el.spin false
 
   resetView: =>
     @fileUploader.remove()
