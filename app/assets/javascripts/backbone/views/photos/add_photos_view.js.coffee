@@ -30,6 +30,7 @@ class EpicImages.Views.AddPhotos extends Backbone.View
     @$el.html @template()
     @fileUploader = new EpicImages.Views.FileUploader
       el: '.photoUploads'
+      dropZone: @$el
       fileElement: @$('input[type=file]')
       globalProgressCallback: @_calculateGlobalProgress
       tags: @options.tags
@@ -43,8 +44,13 @@ class EpicImages.Views.AddPhotos extends Backbone.View
     @collection.save success: @onSaveSuccess, error: @renderError
 
   cancel: =>
-    _.each @collection.models, (photo) =>
-      photo.cancelUpload()
+    if @collection.length > 0
+      if confirm "You've already uploaded some photos. Do you want to cancel and delete these photos? This will also cancel all uploads in progress."
+        _.each @collection.models, (photo) =>
+          photo.cancelUpload()
+
+    @$el.modal 'hide'
+    @$el.on 'hidden', @resetView
 
   onSaveSuccess: =>
     @removeLoading()

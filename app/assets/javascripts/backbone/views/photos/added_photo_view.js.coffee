@@ -103,7 +103,7 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
   _viewAttributes: =>
       _.extend {},
         @model.toJSON(),
-        name: @model.get('name').truncate 30
+        name: @model.get('name')?.truncate 30
 
   _resetPhoto: =>
     @$('.name').css 'color', '#666'

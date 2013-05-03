@@ -27,11 +27,13 @@ class EpicImages.Views.FileUploader extends Backbone.View
       add: @_addFile
       progress: @_calculateProgress
       done: @_finishedUploading
-      change: @_showGlobalProgressBar
       fail: @_renderFailed
       submit: @_setInProgress
+      pasteZone: null
+      dropZone: @options.dropZone
 
   _addFile: (e, image) =>
+    @_showGlobalProgressBar()
     newPhoto = new EpicImages.Models.Photo()
     image._id = @collection.length
     newPhoto.set 'image', image
