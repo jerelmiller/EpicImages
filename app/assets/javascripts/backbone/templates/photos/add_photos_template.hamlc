@@ -16,9 +16,9 @@
   .photoUploads.clearfix
 
 .modal-footer
-  %button.button.save
+  %button.button.save.disabled
     %span.glyph.save
     Save
-  %button.button.red{ 'data-dismiss' => 'modal' }
+  %button.button.red.cancel
     %span.icon16.cross
     Cancel

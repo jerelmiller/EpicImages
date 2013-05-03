@@ -5,6 +5,7 @@ class EpicImages.Views.AddPhotos extends Backbone.View
 
   events:
     'click .save:not(.disabled)'  : 'save'
+    'click .cancel'               : 'cancel'
     'mouseover .filePicker'       : 'addHover'
     'mouseleave .filePicker'      : 'removeHover'
     'blur .filePicker'            : 'removeHover'
@@ -23,8 +24,6 @@ class EpicImages.Views.AddPhotos extends Backbone.View
 
     @$el.on 'shown', @_styleFileInput
     @$el.on 'showProgressBar', '.photoUploads', @_showProgressBar
-    @$el.on 'finishedUploading', '.photoUploads', @_hideUploadingText
-    @$el.on 'finishedUploading', '.photoUploads', @_enableSaveButton
     @$el.on 'recalculateLayout', '.photoUploads', @_recalculateLayout
 
   render: =>
@@ -42,6 +41,10 @@ class EpicImages.Views.AddPhotos extends Backbone.View
   save: =>
     @showLoading()
     @collection.save success: @onSaveSuccess, error: @renderError
+
+  cancel: =>
+    _.each @collection.models, (photo) =>
+      photo.cancelUpload()
 
   onSaveSuccess: =>
     @removeLoading()
@@ -92,6 +95,9 @@ class EpicImages.Views.AddPhotos extends Backbone.View
   _hideUploadingText: =>
     @$('.uploading').hide()
 
+  _showUploadingText: =>
+    @$('.uploading').show()
+
   _recalculateLayout: =>
     _.defer =>
       @$('.photoUploads').masonry 'destroy' if @$('.photoUploads').data 'masonry'
@@ -106,4 +112,9 @@ class EpicImages.Views.AddPhotos extends Backbone.View
     @$('.save').removeClass 'disabled'
 
   _bindListeners: =>
+    @listenTo @collection, 'resubmit', @_disableSaveButton
+    @listenTo @collection, 'resubmit', @_showUploadingText
+    @listenTo @collection, 'success failed', @_hideUploadingText
+    @listenTo @collection, 'success', @_enableSaveButton
+    @listenTo @collection, 'add finished fail', @_recalculateLayout # Listen for individual model success and fail
     @listenTo @collection, 'add', @_disableSaveButton

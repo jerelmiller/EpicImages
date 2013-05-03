@@ -5,6 +5,9 @@
 %button.button.resubmit.hide
   %span.glyph.redo
   Resubmit
+%button.button.red.cancelImage{ style: 'margin: 5px 0 0 0;' }
+  %span.icon16.cross
+  Cancel
 .attributesContainer.hide
   .attributes
     %textarea.inputIcon.captionInput{ placeholder: 'Say something about this photo...', rows: 4 }

@@ -1,6 +1,7 @@
 class EpicImages.Views.AddedPhoto extends Backbone.View
   template: JST['backbone/templates/photos/photo_uploader_template']
   imageTemplate: JST['backbone/templates/photos/image_template']
+  errorUploadTemplate: JST['backbone/templates/photos/error_upload_template']
 
   attributes:
     class: 'photoUpload'
@@ -8,6 +9,7 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
   events:
     'keyup .captionInput'    : 'setCaption'
     'click .resubmit'        : 'resubmit'
+    'click .cancelImage'     : 'cancel'
     'click input.isFeatured' : 'updateFeatured'
 
   initialize: =>
@@ -23,6 +25,9 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
     }).on 'hidden', (e) => e.stopPropagation() # fix to prevent bubbling to modal
     @
 
+  cancel: =>
+    @model.cancelUpload()
+
   setCaption: (e) =>
     @model.set 'caption', @$(e.target).val()
 
@@ -36,29 +41,44 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
     @_showImage()
     @_renderTagsInput()
     @$('.upload').hide()
+    @$('.cancelImage').hide()
     @$('.attributesContainer').show()
 
   renderFailed: (callback) =>
+    text = 'There was an error processing the photo'
+    text = 'Upload was cancelled' if @model.get('xhr').statusText == 'abort'
     @$('.progress').hide()
+    @$('.cancelImage').hide()
     @$('.resubmit').show()
-    @$('.name').after '<div class="hint" style="margin-bottom: 5px; color: #E74C2F;">There was an error processing the photo</div>'
+    @$('.name').after @errorUploadTemplate text: text
 
   resubmit: =>
     @_resetPhoto()
     @_restartProgress()
-    @model.get('image').submit()
+    @submitImage()
+    @model.trigger 'resubmit'
 
   updateFeatured: (e) =>
     @$(e.target).tooltip('hide')
     @model.set 'featured_flag', @$(e.target).is(':checked')
 
+  setFailed: (didFail) =>
+    return @model.set 'failed', true if didFail
+    @model.unset 'failed'
+
+  setInProgress: (isInProgress) =>
+    return @model.set 'in_progress', true if isInProgress
+    @model.unset 'in_progress'
+
   _restartProgress: =>
     @$('.progress').show()
+    @$('.cancelImage').show()
     @$('.resubmit').hide()
 
   _bindListeners: =>
     @listenTo @model, 'change:progress', @_renderProgress
-    @listenTo @model, 'finishedUploading', @renderComplete
+    @listenTo @model, 'finished', @renderComplete
+    @listenTo @model, 'finished', @_unsetFailed
     @listenTo @model, 'change:featured_flag', @_changeChecked
 
   _renderTagsInput: =>
@@ -88,8 +108,9 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
   _resetPhoto: =>
     @$('.name').css 'color', '#666'
     @$('.hint').remove()
-    @$('.bar').css 'width', 0
+    @$('.bar').css 'width', 0 # Explicitely set to 0 so progress won't animate to 0
     @model.set 'progress', 0
+    @_unsetFailed()
 
   _showImage: =>
     @$('.attributesContainer').prepend @imageTemplate @model.toJSON()
@@ -99,3 +120,6 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
         @$('.photo').spin false
         $image.fadeIn()
         $image.css 'display', 'block'
+
+  _unsetFailed: =>
+    @model.unset 'failed'

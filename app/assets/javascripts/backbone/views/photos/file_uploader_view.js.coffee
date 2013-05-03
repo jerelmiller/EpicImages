@@ -29,13 +29,13 @@ class EpicImages.Views.FileUploader extends Backbone.View
       done: @_finishedUploading
       change: @_showGlobalProgressBar
       fail: @_renderFailed
+      submit: @_setInProgress
 
   _addFile: (e, image) =>
     newPhoto = new EpicImages.Models.Photo()
     image._id = @collection.length
     newPhoto.set 'image', image
     @collection.add newPhoto
-    @$el.trigger 'recalculateLayout'
 
   _calculateProgress: (e, image) =>
     progress = parseInt(image.loaded / image.total * 100, 10)
@@ -45,15 +45,16 @@ class EpicImages.Views.FileUploader extends Backbone.View
   _finishedUploading: (e, image) =>
     view = @_findSubviewFor(image._id)
     view.model.set @_completedPhotoAttrs(image)
+    view.setFailed false
+    view.setInProgress false
     view.setProgress 100
-    @$el.trigger 'finishedUploading' if @collection.isAllFinished()
-    @$el.trigger 'recalculateLayout'
 
   _renderFailed: (e, image) =>
     view = @_findSubviewFor(image._id)
     view.renderFailed()
-    view.model.set 'progress', 99
-    @$el.trigger 'recalculateLayout'
+    view.setFailed true
+    view.setInProgress false
+    view.setProgress 100
 
   _showGlobalProgressBar: =>
     @$el.trigger 'showProgressBar'
@@ -67,6 +68,9 @@ class EpicImages.Views.FileUploader extends Backbone.View
 
   _calculateGlobalProgress: =>
     @options.globalProgressCallback @collection.averageProgress()
+
+  _setInProgress: (e, image) =>
+    @_findSubviewFor(image._id).setInProgress true
 
   _completedPhotoAttrs: (image) =>
     JSON.parse(image.jqXHR.responseText)

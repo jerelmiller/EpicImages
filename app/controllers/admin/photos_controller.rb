@@ -11,11 +11,7 @@ class Admin::PhotosController < Admin::AdminController
   def create
     ActiveRecord::Base.transaction do
       @photo = Photo.new params[:photo]
-      if @photo.save
-        flash[:success] = "The image has been successfully uploaded"
-      else
-        flash[:error] = @photo.errors.full_messages.join('<br>')
-      end
+      @photo.save
 
       respond_to do |format|
         format.json
