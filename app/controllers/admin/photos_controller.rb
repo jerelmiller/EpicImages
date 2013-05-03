@@ -9,7 +9,7 @@ class Admin::PhotosController < Admin::AdminController
   end
 
   def create
-    ActiveRecord::Base.transaction do
+    Photo.transaction do
       @photo = Photo.new params[:photo]
       @photo.save
 
