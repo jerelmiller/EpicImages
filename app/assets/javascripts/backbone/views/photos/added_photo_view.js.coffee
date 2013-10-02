@@ -9,7 +9,6 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
   events:
     'keyup .captionInput'    : 'setCaption'
     'click .resubmit'        : 'resubmit'
-    'click .cancelImage'     : 'cancel'
     'click input.isFeatured' : 'updateFeatured'
 
   initialize: =>
@@ -24,9 +23,6 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
         hide: 0
     }).on 'hidden', (e) => e.stopPropagation() # fix to prevent bubbling to modal
     @
-
-  cancel: =>
-    @model.cancelUpload()
 
   setCaption: (e) =>
     @model.set 'caption', @$(e.target).val()

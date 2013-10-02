@@ -20,10 +20,6 @@ class EpicImages.Models.Photo extends Backbone.Model
   hasFinished: =>
     @get('progress') == 100 && !@get('failed')
 
-  cancelUpload: =>
-    @get('xhr').abort()
-    @trigger 'abort'
-
   hasFailed: =>
     @get('failed')
 

@@ -51,12 +51,21 @@ class Admin::PhotosController < Admin::AdminController
   end
 
   def destroy
-    if @photo.destroy
-      flash[:success] = "The photo was successfully deleted"
-      redirect_to admin_photos_path and return
-    else
-      flash[:error] = "There was a problem deleting the photo. Please try again"
-      redirect_to request.referer
+    photo_destroyed = @photo.destroy
+    respond_to do |format|
+      format.html do
+        if photo_destroyed
+          flash[:success] = "The photo was successfully deleted"
+          redirect_to admin_photos_path and return
+        else
+          flash[:error] = "There was a problem deleting the photo. Please try again."
+          redirect_to request.referer
+        end
+      end
+      format.json do
+        render json: { error: 'There was a problem deleting the photo. Please try again.' }, status: :unprocessable_entity and return unless photo_destroyed
+        render nothing: true, status: :ok
+      end
     end
   end
 

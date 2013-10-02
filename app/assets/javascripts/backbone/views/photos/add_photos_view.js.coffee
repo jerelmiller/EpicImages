@@ -4,11 +4,11 @@ class EpicImages.Views.AddPhotos extends Backbone.View
   error: JST['backbone/templates/alerts/error']
 
   events:
-    'click .save:not(.disabled)'  : 'save'
-    'click .cancel'               : 'cancel'
-    'mouseover .filePicker'       : 'addHover'
-    'mouseleave .filePicker'      : 'removeHover'
-    'blur .filePicker'            : 'removeHover'
+    'click .save:not(.disabled)'   : 'save'
+    'click .cancel:not(.disabled)' : 'cancel'
+    'mouseover .filePicker'        : 'addHover'
+    'mouseleave .filePicker'       : 'removeHover'
+    'blur .filePicker'             : 'removeHover'
 
   initialize: =>
     @$el.modal
@@ -45,12 +45,12 @@ class EpicImages.Views.AddPhotos extends Backbone.View
 
   cancel: =>
     if @collection.length > 0
-      if confirm "You've already uploaded some photos. Do you want to cancel and delete these photos? This will also cancel all uploads in progress."
+      if confirm "You've already uploaded some photos. Do you want to cancel and delete these photos?"
         _.each @collection.models, (photo) =>
-          photo.cancelUpload()
+          photo.destroy()
 
-    @$el.modal 'hide'
-    @$el.on 'hidden', @resetView
+        @$el.modal 'hide'
+        @$el.on 'hidden', @resetView
 
   onSaveSuccess: =>
     @removeLoading()
@@ -111,16 +111,18 @@ class EpicImages.Views.AddPhotos extends Backbone.View
         itemSelector: '.photoUpload'
         isAnimated: true
 
-  _disableSaveButton: =>
+  _disableButtons: =>
     @$('.save').addClass 'disabled'
+    @$('.cancel').addClass 'disabled'
 
-  _enableSaveButton: =>
+  _enableButtons: =>
     @$('.save').removeClass 'disabled'
+    @$('.cancel').removeClass 'disabled'
 
   _bindListeners: =>
-    @listenTo @collection, 'resubmit', @_disableSaveButton
+    @listenTo @collection, 'resubmit', @_disableButtons
     @listenTo @collection, 'resubmit', @_showUploadingText
     @listenTo @collection, 'success failed', @_hideUploadingText
-    @listenTo @collection, 'success', @_enableSaveButton
+    @listenTo @collection, 'success', @_enableButtons
     @listenTo @collection, 'add finished fail', @_recalculateLayout # Listen for individual model success and fail
-    @listenTo @collection, 'add', @_disableSaveButton
+    @listenTo @collection, 'add', @_disableButtons
