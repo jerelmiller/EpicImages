@@ -10,7 +10,7 @@
     %textarea.inputIcon.captionInput{ placeholder: 'Say something about this photo...', rows: 4 }
     %label.icon.inputIcon.bubble
     .tags.relative
-      .tagsInput
+      %div{ id: "tags-input-#{@image._id}" }
     .featured.relative
       .selectable
         %input.isFeatured.tip{ type: 'checkbox', 'data-title' => 'Make featured photo', 'data-placement' => 'right' }

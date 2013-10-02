@@ -79,7 +79,7 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
 
   _renderTagsInput: =>
     tagInputView = new EpicImages.Views.TagInput
-      el: '.tagsInput'
+      el: "#tags-input-#{@model.get('image')?._id}"
       collection: @options.tags
 
     tagInputView.render()
@@ -97,9 +97,10 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
     @$('.heart').removeClass 'red'
 
   _viewAttributes: =>
-      _.extend {},
-        @model.toJSON(),
-        name: @model.get('name')?.truncate 30
+    _.extend {},
+      @model.toJSON(),
+      name: @model.get('name')?.truncate 30
+      image: @model.get('image')
 
   _resetPhoto: =>
     @$('.name').css 'color', '#666'

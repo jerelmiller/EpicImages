@@ -9,7 +9,6 @@ class EpicImages.Views.TagInput extends Backbone.View
 
   render: =>
     @$el.html @template _.extend {}, @options, tags: @collection.models, searchedTags: @options.tagData
-
     @addSelect2()
 
   registerChangeCallback: (callback) =>
@@ -22,6 +21,7 @@ class EpicImages.Views.TagInput extends Backbone.View
         width: 'element'
         tags: @collection.map(@wrapTag)
         formatSelection: @formatSelection
+        createSearchChoice: @createSearchChoice
         placeholder: "Add some tags..."
 
       @$('input#tags').on 'change', @changeCollection
@@ -50,9 +50,6 @@ class EpicImages.Views.TagInput extends Backbone.View
     if e.added
       @userTags.findOrInitialize e.added.text
     else if e.removed
-      @_removeTag @userTags.where(name: e.removed.text)[0]
+      @userTags.remove @userTags.where(name: e.removed.text)[0]
 
     @callback(@userTags) if @callback
-
-  _removeTag: (tag) =>
-    @userTags.remove tag
