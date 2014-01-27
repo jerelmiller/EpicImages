@@ -34,7 +34,7 @@ class EpicImages.Views.TagInput extends Backbone.View
       @
 
   createSearchChoice: (term) =>
-    @wrapTag(new Analyze.Models.Tag(name: $.trim(term)))
+    @wrapTag(new EpicImages.Models.Tag(name: $.trim(term)))
 
   formatSelection: (object, container) =>
     container.find('a').remove()

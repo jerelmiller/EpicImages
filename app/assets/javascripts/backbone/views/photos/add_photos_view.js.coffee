@@ -34,10 +34,13 @@ class EpicImages.Views.AddPhotos extends Backbone.View
       fileElement: @$('input[type=file]')
       globalProgressCallback: @_calculateGlobalProgress
       tags: @options.tags
+      autoApplyTags: @defaultAppliedTags
       collection: @collection
 
     @fileUploader.render()
     @
+
+  applyDefaultTag: (tag) => @fileUploader.addDefaultTag tag
 
   save: =>
     @showLoading()
@@ -51,6 +54,8 @@ class EpicImages.Views.AddPhotos extends Backbone.View
 
         @$el.modal 'hide'
         @$el.on 'hidden', @resetView
+    else
+      @$el.modal 'hide'
 
   onSaveSuccess: =>
     @removeLoading()
@@ -75,11 +80,8 @@ class EpicImages.Views.AddPhotos extends Backbone.View
     @collection.reset()
     @render()
 
-  addHover: =>
-    @$('.chooseFile').addClass 'hover'
-
-  removeHover: =>
-    @$('.chooseFile').removeClass 'hover'
+  addHover: => @$('.chooseFile').addClass 'hover'
+  removeHover: => @$('.chooseFile').removeClass 'hover'
 
   _styleFileInput: =>
     height = @$('.chooseFile').outerHeight()
@@ -95,14 +97,10 @@ class EpicImages.Views.AddPhotos extends Backbone.View
     @$('.progress.global .bar').animate
       width: "#{progress}%"
 
-  _showProgressBar: =>
-    @$('.progress.global, .uploading').show()
+  _showProgressBar: => @$('.progress.global, .uploading').show()
+  _hideUploadingText: => @$('.uploading').hide()
 
-  _hideUploadingText: =>
-    @$('.uploading').hide()
-
-  _showUploadingText: =>
-    @$('.uploading').show()
+  _showUploadingText: => @$('.uploading').show()
 
   _recalculateLayout: =>
     _.defer =>

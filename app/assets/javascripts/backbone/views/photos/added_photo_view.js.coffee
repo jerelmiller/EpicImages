@@ -14,6 +14,7 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
   initialize: =>
     @_bindListeners()
     @setCaption = _.debounce @setCaption, 100
+    @autoApplyTags = @options.autoApplyTags
 
   render: =>
     @$el.html @template @_viewAttributes()
@@ -81,6 +82,9 @@ class EpicImages.Views.AddedPhoto extends Backbone.View
     tagInputView = new EpicImages.Views.TagInput
       el: "#tags-input-#{@model.get('image')?._id}"
       collection: @options.tags
+      tagData: @autoApplyTags
+
+    @_updatePhotoTags(new EpicImages.Collections.Tags(@autoApplyTags)) if @autoApplyTags
 
     tagInputView.render()
     tagInputView.registerChangeCallback @_updatePhotoTags

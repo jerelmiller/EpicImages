@@ -3,6 +3,7 @@ class EpicImages.Views.FileUploader extends Backbone.View
   initialize: =>
     @$fileElement = @options.fileElement
     @subviews = []
+    @autoApplyTags = @options.autoApplyTags || []
     @_bindListeners()
 
   render: =>
@@ -13,11 +14,14 @@ class EpicImages.Views.FileUploader extends Backbone.View
     photoView = new EpicImages.Views.AddedPhoto
       model: photo
       tags: @options.tags
+      autoApplyTags: @autoApplyTags
 
     @$el.append photoView.render().el
 
     @subviews.push photoView
     photoView.submitImage()
+
+  addDefaultTag: (tag) => @autoApplyTags.push tag
 
   _fileUploadOptions: =>
     _.extend {},

@@ -59,11 +59,6 @@
     #{render(partial: 'admin/photos/photos', locals: { photos: @photos }, formats: [:json])}
   );
 
-  var galleriesView = new EpicImages.Views.TagGalleries({
-    el: '.galleries',
-    collection: galleryTags
-  });
-
   var tagInputView = new EpicImages.Views.TagInput({
     el: '#galleryInput',
     collection: tags
@@ -72,6 +67,12 @@
   var addPhotosView = new EpicImages.Views.AddPhotos({
     el: '#photoUpload',
     tags: tags
+  });
+
+  var galleriesView = new EpicImages.Views.TagGalleries({
+    el: '.galleries',
+    collection: galleryTags,
+    addPhotosView: addPhotosView
   });
 
   var photoListView = new EpicImages.Views.PhotoList({

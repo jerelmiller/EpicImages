@@ -7,6 +7,10 @@ class EpicImages.Views.TagGallery extends Backbone.View
   events:
     'mouseover' : 'onMouseover'
     'mouseleave'  : 'onMouseleave'
+    'click .placeholder' : 'addTagsToPhotosView'
+
+  initialize: ->
+    @addPhotosView = @options.addPhotosView
 
   render: =>
     @$el.html @template @_viewAttributes()
@@ -21,6 +25,8 @@ class EpicImages.Views.TagGallery extends Backbone.View
   onMouseleave: =>
     @$('img').animate opacity: 1, 200
     @$('.caption').show().animate top: '0px', 200, 'easeOutQuint', @_hideCaption
+
+  addTagsToPhotosView: => @addPhotosView.applyDefaultTag @model
 
   _hideCaption: =>
     @$('.caption').hide()
