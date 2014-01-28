@@ -17,6 +17,7 @@
 .clear
 
 %section.photos{ masonry: true }
+  %spin{ 'spin-on' => 'fetchingPhotos', dim: '.photo' }
   .photo.angular{ 'ng-repeat' => 'photo in photos', 'ng-style' => '{ height: photo.height }', 'trigger-masonry' => true }
     = link_to '/admin/photos/{{ photo.id }}/edit' do
       %img{ 'ng-src' => '{{ photo.thumb }}' }

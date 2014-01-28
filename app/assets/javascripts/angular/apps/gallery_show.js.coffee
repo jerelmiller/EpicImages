@@ -1,4 +1,4 @@
-angular.module('galleryShow', ['applicationServices', 'ngResource'])
+angular.module('galleryShow', ['applicationServices', 'applicationDirectives', 'ngResource'])
 .config(['$httpProvider', ($httpProvider) ->
   $httpProvider.defaults.headers['common']['Accept'] = 'application/json'
 ])
@@ -28,4 +28,8 @@ angular.module('galleryShow', ['applicationServices', 'ngResource'])
   DataSeed.then (data) ->
     angular.extend $scope, data
 
-    $scope.addPhotosView.on 'saved', -> $scope.photos = Photo.fetchAll(id: $scope.gallery.id)
+    $scope.addPhotosView.on 'saved', ->
+      $scope.fetchingPhotos = true
+      Photo.fetchAll(id: $scope.gallery.id).$promise.then (photos) ->
+        $scope.photos = photos
+        $scope.fetchingPhotos = false
