@@ -1,30 +1,7 @@
-/ = link_to '#editGallery', class: 'button', 'data-toggle' => 'modal' do
-/   %span.icon16.edit
-/   Edit Gallery
-
-/ #editGallery.modal.hide.fade
-/   .modal-header
-/     %h2
-/       %span.icon24.plus
-/       Add new photos
-/   = form_for [:admin, @gallery] do |f|
-/     .modal-body.extend
-/       .input
-/         %label Tags
-/         #tagsInput
-/       .input.checkbox
-/         = f.check_box :featured_flag
-/         %label Featured
-/       .divider
-/       .input
-/         %label Make tags a gallery
-/         #galleryInput
-/     .modal-footer
-/       = save_button
-/       = cancel_button 'data-dismiss' => 'modal'
+#photoUpload.modal.hide.fade
 
 = link_to '&larr; Back to photos'.html_safe, admin_photos_path, class: 'button left'
-= link_to '#', class: 'button left' do
+= link_to '#photoUpload', class: 'button left', 'data-toggle' => 'modal' do
   %span.icon16.plus
   Add photos
 = link_to '#', class: 'button red left' do
@@ -37,26 +14,19 @@
   = render @gallery.photos
   .clear
 
-/ :javascript
-/   var tags = new EpicImages.Collections.Tags(
-/     #{render(partial: 'tags/tags', locals: { tags: @tags }, formats: [:json])}
-/   );
+:javascript
+  var tags = new EpicImages.Collections.Tags(
+    #{render(partial: 'tags/tags', locals: { tags: @tags }, formats: [:json])}
+  );
 
-/   var galleryTags = new EpicImages.Collections.Tags(
-/     #{render(partial: 'tags/tags', locals: { tags: @galleries }, formats: [:json])}
-/   );
+  var gallery = new EpicImages.Models.Tag(
+    #{render(partial: 'tags/tag', locals: { tag: @gallery }, formats: [:json])}
+  )
 
-/   var tagInputView = new EpicImages.Views.TagInput({
-/     el: '#tagsInput',
-/     collection: tags
-/   });
+  var addPhotosView = new EpicImages.Views.AddPhotos({
+    el: '#photoUpload',
+    tags: tags
+  });
 
-/   var tagSelectionView = new EpicImages.Views.TagSelection({
-/     el: '#galleryInput',
-/     collection: tags,
-/     tagData: galleryTags,
-/     fieldName: 'gallery_tags'
-/   });
-
-/   tagInputView.render()
-/   tagSelectionView.render();
+  addPhotosView.render();
+  addPhotosView.applyDefaultTag(gallery);
