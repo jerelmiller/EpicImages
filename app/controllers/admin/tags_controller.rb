@@ -14,6 +14,11 @@ class Admin::TagsController < Admin::AdminController
     redirect_to admin_photos_path
   end
 
+  def photos
+    @photos = Tag.find(params[:id]).photos
+    render partial: 'admin/photos/photos', locals: { photos: @photos }, formats: [:json]
+  end
+
   private
 
     def filtered_id

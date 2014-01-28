@@ -20,7 +20,9 @@ EpicImages::Application.routes.draw do
       end
     end
     resources :blogs
-    resources :tags, path: 'galleries', only: [:show, :create]
+    resources :tags, path: 'galleries', only: [:show, :create] do
+      get :photos, on: :member
+    end
     root :to => 'admin#index'
   end
 

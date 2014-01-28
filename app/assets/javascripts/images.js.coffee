@@ -10,8 +10,8 @@ $ ->
     $(@).spin false
     $images.fadeIn()
 
-  $('.photo').spin()
-  $('.photo').imagesLoaded ($image) ->
+  $('.photo:not(.angular)').spin()
+  $('.photo:not(.angular)').imagesLoaded ($image) ->
     $(@).spin false
     $image.fadeIn()
 

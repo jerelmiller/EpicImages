@@ -7,7 +7,7 @@
     = csrf_meta_tags
   %body
     = render 'layouts/admin/menu'
-    .content
+    .content{ 'ng-app' => content_for?(:angular_app) ? yield(:angular_app) : nil, 'ng-controller' => content_for?(:angular_controller) ? yield(:angular_controller) : nil }
       = yield
       %footer
         .copyright &copy; COPYRIGHT 2013 EPIC IMAGES

@@ -1,3 +1,9 @@
+- content_for :angular_app do
+  galleryShow
+
+- content_for :angular_controller do
+  GalleryShowCtrl
+
 #photoUpload.modal.hide.fade
 
 = link_to '&larr; Back to photos'.html_safe, admin_photos_path, class: 'button left'
@@ -10,8 +16,11 @@
 %h1.right= @gallery.name.titleize
 .clear
 
-%section.photos
-  = render @gallery.photos
+%section.photos{ masonry: true }
+  .photo.angular{ 'ng-repeat' => 'photo in photos', 'ng-style' => '{ height: photo.height }', 'trigger-masonry' => true }
+    = link_to '/admin/photos/{{ photo.id }}/edit' do
+      %img{ 'ng-src' => '{{ photo.thumb }}' }
+
   .clear
 
 :javascript
@@ -30,3 +39,11 @@
 
   addPhotosView.render();
   addPhotosView.applyDefaultTag(gallery);
+
+  $(document).ready(function() {
+    EpicImages.AngularDataSeed({
+      addPhotosView: addPhotosView,
+      gallery: #{render partial: 'tags/tag', locals: { tag: @gallery }, formats: [:json] },
+      photos: #{render partial: 'admin/photos/photos', locals: { photos: @gallery.photos }, formats: [:json] }
+    });
+  })

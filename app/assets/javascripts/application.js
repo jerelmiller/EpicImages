@@ -26,4 +26,8 @@
 //= require hamlcoffee
 //= require jquery-fileupload/basic
 //= require utils
-//= require_tree .
+//= require bootstrap
+//= require images
+//= require angular
+//= require angular-resource
+//= require_tree ./angular
