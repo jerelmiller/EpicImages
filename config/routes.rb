@@ -18,6 +18,9 @@ EpicImages::Application.routes.draw do
         put :update_all
         get :all_photos
       end
+      member do
+        get :image
+      end
     end
     resources :blogs
     resources :tags, path: 'galleries', only: [:show, :create] do

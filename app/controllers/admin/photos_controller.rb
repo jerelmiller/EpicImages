@@ -1,5 +1,5 @@
 class Admin::PhotosController < Admin::AdminController
-  before_filter :load_photo, only: [:edit, :update, :destroy]
+  before_filter :load_photo, only: [:edit, :update, :destroy, :image]
 
   def index
     @photos = Photo.order('created_at desc')
@@ -71,6 +71,10 @@ class Admin::PhotosController < Admin::AdminController
 
   def all_photos
     @photos = Photo.order('id desc')
+  end
+
+  def image
+    render json: { thumb: @photo.image.url(:thumb) }, status: :ok
   end
 
   private

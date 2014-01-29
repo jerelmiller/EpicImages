@@ -1,3 +1,0 @@
-.photo{ style: "height: #{@height}px" }
-  %a{ href: @edit_link }
-    %img{ src: @thumb }

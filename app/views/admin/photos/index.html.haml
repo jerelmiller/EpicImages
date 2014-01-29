@@ -1,3 +1,9 @@
+- content_for :angular_app do
+  photosIndex
+
+- content_for :angular_controller do
+  PhotoListCtrl
+
 #photoUpload.modal.hide.fade
 
 #newGallery.modal.hide.fade
@@ -41,7 +47,16 @@
         %span Galleries
         %span.arrowUp.border
         %span.arrowUp
-%section.photos
+
+%section.photos{ masonry: true }
+  %h3{ 'ng-hide' => 'photos.length > 0' }
+    There are currently no photos.
+    = link_to '#photoUpload', 'data-toggle' => 'modal', style: 'margin-left: 40px;' do
+      %span.icon24.plus{ style: 'font-size: 16px;' }
+      Add some photos
+  %spin{ 'spin-on' => 'fetchingPhotos', dim: '.photo' }
+  %photos-list{ photos: 'photos' }
+  .clear
 %section.galleries.hide
   - if @galleries.empty?
     %h1.center No galleries created yet. Go ahead and create one!
@@ -53,10 +68,6 @@
 
   var galleryTags = new EpicImages.Collections.Tags(
     #{render(partial: 'tags/tags', locals: { tags: @galleries }, formats: [:json])}
-  );
-
-  var photos = new EpicImages.Collections.Photos(
-    #{render(partial: 'admin/photos/photos', locals: { photos: @photos }, formats: [:json])}
   );
 
   var tagInputView = new EpicImages.Views.TagInput({
@@ -75,15 +86,9 @@
     addPhotosView: addPhotosView
   });
 
-  var photoListView = new EpicImages.Views.PhotoList({
-    el: '.photos',
-    collection: photos
-  })
-
   addPhotosView.render();
   tagInputView.render();
   galleriesView.render();
-  photoListView.render();
 
   $(document).ready(function() {
     $('#photosView').click(function(e) {
@@ -103,4 +108,8 @@
     addPhotosView.on('saved', function() {
       photoListView.refresh();
     });
+
+    EpicImages.AngularDataSeed({
+      photos: #{render(partial: 'admin/photos/photos', locals: { photos: @photos }, formats: [:json])}
+    })
   });
