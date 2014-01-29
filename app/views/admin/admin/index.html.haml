@@ -1,1 +1,4 @@
-Logged in
+%h1.dashboard-greeting= "Hello, #{current_user}"
+= link_to admin_photos_path, class: 'dashboard-statistic-container' do
+  .dashboard-statistic= @photos.count
+  .dashboard-statistic-description Photos

@@ -1,0 +1,8 @@
+@import 'mixins';
+
+%tile-style {
+  background: white;
+  position: relative;
+  @include border-radius(2px);
+  @include box-shadow(0 0 9px rgba(0, 0, 0, 0.1));
+}

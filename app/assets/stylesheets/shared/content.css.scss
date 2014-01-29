@@ -1,5 +1,6 @@
 @import 'colors';
 @import 'mixins';
+@import 'placeholders';
 
 .content {
   width: 960px;
@@ -7,11 +8,8 @@
 }
 
 section {
+  @extend %tile-style;
   padding: 20px;
-  background: white;
-  position: relative;
-  @include border-radius(2px);
-  @include box-shadow(0 0 9px rgba(0, 0, 0, 0.1));
   margin-top: 20px;
 
   a {

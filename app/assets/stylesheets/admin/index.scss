@@ -1,0 +1,26 @@
+@import 'shared/mixins';
+@import 'shared/placeholders';
+@import 'shared/colors';
+
+$main-content-width: 960px;
+$num-dashboard-statistics: 1;
+$stastic-spacing: 20px;
+
+@function calculate-tiled-item-width($container-width, $num-items, $spacing) { @return ($container-width / $num-items) - (($spacing / $num-items) * ($num-items - 1)); }
+
+.dashboard-statistic-container {
+  @extend %tile-style;
+  display: block;
+  width: calculate-tiled-item-width($main-content-width, $num-dashboard-statistics, $stastic-spacing);
+  padding: 20px;
+  text-align: center;
+  color: $textGray;
+}
+
+.dashboard-statistic { font-size: 70px; }
+.dashboard-statistic-description { font-size: 30px; }
+
+.dashboard-greeting {
+  padding-bottom: 10px;
+  text-align: center;
+}
