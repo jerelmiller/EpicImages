@@ -3,9 +3,18 @@ class Admin::PhotosController < Admin::AdminController
 
   def index
     @photos = Photo.order('created_at desc')
-    @photo = Photo.new
-    @tags = Tag.includes{ photos }.all
-    @galleries = Tag.gallery
+
+    respond_to do |format|
+      format.json do
+        render partial: 'admin/photos/photos', locals: { photos: @photos }, formats: [:json]
+      end
+
+      format.html do
+        @photo = Photo.new
+        @tags = Tag.includes{ photos }.all
+        @galleries = Tag.gallery
+      end
+    end
   end
 
   def create

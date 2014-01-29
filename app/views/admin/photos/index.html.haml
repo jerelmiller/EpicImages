@@ -92,6 +92,7 @@
 
   $(document).ready(function() {
     EpicImages.AngularDataSeed({
-      photos: #{render(partial: 'admin/photos/photos', locals: { photos: @photos }, formats: [:json])}
+      photos: #{render(partial: 'admin/photos/photos', locals: { photos: @photos }, formats: [:json])},
+      addPhotosView: addPhotosView
     })
   });
