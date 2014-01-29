@@ -12,7 +12,7 @@ class Admin::PhotosController < Admin::AdminController
       format.html do
         @photo = Photo.new
         @tags = Tag.includes{ photos }.all
-        @galleries = Tag.gallery
+        @galleries = Tag.gallery.includes{ photos }
       end
     end
   end
