@@ -18,7 +18,7 @@
 
 %section.photos{ masonry: true }
   %spin{ 'spin-on' => 'fetchingPhotos', dim: '.photo' }
-  %photos-list{ photos: 'photos' }
+  %photos-list{ photos: 'photos', 'can-edit' => 'true' }
   .clear
 
 :javascript

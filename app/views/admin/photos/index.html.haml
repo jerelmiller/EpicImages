@@ -55,7 +55,7 @@
       %span.icon24.plus{ style: 'font-size: 16px;' }
       Add some photos
   %spin{ 'spin-on' => 'fetchingPhotos', dim: '.photo' }
-  %photos-list{ photos: 'photos' }
+  %photos-list{ photos: 'photos', 'can-edit' => 'true' }
   .clear
 %section.galleries{ 'ng-show' => 'currentTab == "galleries"' }
   - if @galleries.empty?

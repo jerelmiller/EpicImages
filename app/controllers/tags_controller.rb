@@ -1,12 +1,12 @@
 class TagsController < ApplicationController
 
   def index
-    @galleries = Tag.gallery.with_photos
+    @galleries = Tag.gallery.with_photos.includes(:photos)
     @searchable_tags = Tag.all
   end
 
   def show
-    @tag = Tag.where('LOWER(name) = ?', filtered_id).first
+    @tag = Tag.where('LOWER(name) = ?', filtered_id).includes(:photos).first
   end
 
   def search

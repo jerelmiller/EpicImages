@@ -5,6 +5,7 @@ angular.module('photosList', ['photoServices', 'photoDirectives', 'applicationDi
   replace: true
   scope:
     photos: '='
+    canEdit: '='
   link: (scope, element, attrs) ->
     fetchPhoto = (photo) ->
       $timeout ->

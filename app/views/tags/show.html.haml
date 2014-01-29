@@ -1,7 +1,18 @@
+- content_for :angular_app do
+  gallery
+
+- content_for :angular_controller do
+  GalleryCtrl
+
 = link_to '&larr; Back to gallery'.html_safe, tags_path, class: 'button left'
 %h1.right= @tag.name.upcase
 .clear
-%section.photos
-  - @tag.photos.each do |photo|
-    .photo{ style: "height: #{photo.image.height(:thumb)}px" }= image_tag photo.image.url(:thumb)
+%section.photos{ masonry: true }
+  %photos-list{ photos: 'photos' }
   .clear
+  :javascript
+    $(document).ready(function() {
+      EpicImages.AngularDataSeed({
+        photos: #{render partial: 'photos/photos', locals: { photos: @tag.photos }, formats: [:json] }
+      });
+    });

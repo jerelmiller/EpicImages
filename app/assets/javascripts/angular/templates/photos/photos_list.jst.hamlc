@@ -1,4 +1,6 @@
 .photo.angular{ 'ng-repeat' => 'photo in photos', 'ng-style' => '{ height: photo.height }', 'trigger-masonry' => true, 'images-loaded' => 'photo.retrievedImage' }
   %spin{ 'spin-on' => 'photo.fetchingImage' }
-  %a{ 'ng-href' => '/admin/photos/{{ photo.id }}/edit' }
+  %a{ 'ng-href' => '/admin/photos/{{ photo.id }}/edit', 'ng-if' => 'canEdit' }
     %img{ 'ng-src' => '{{ photo.thumb }}' }
+
+  %img{ 'ng-src' => '{{ photo.thumb }}', 'ng-if' => '!canEdit' }
