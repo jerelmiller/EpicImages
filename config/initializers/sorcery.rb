@@ -2,7 +2,7 @@
 # The default is nothing which will include only core features (password encryption, login/logout).
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging, :external
-Rails.application.config.sorcery.submodules = []
+Rails.application.config.sorcery.submodules = [:session_timeout]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
@@ -26,13 +26,13 @@ Rails.application.config.sorcery.configure do |config|
   #
   # config.cookie_domain =
 
-  
+
   # -- remember_me --
   # allow the remember_me cookie to settable through AJAX
   # Default: `true`
   #
   # user.remember_me_httponly =
-  
+
   # How long in seconds the session length will be
   # Default: `604800`
   #
@@ -48,7 +48,7 @@ Rails.application.config.sorcery.configure do |config|
   # Use the last action as the beginning of session timeout.
   # Default: `false`
   #
-  # config.session_timeout_from_last_action =
+  config.session_timeout_from_last_action = true
 
 
   # -- http_basic_auth --
@@ -100,7 +100,7 @@ Rails.application.config.sorcery.configure do |config|
   # config.linkedin.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=linkedin"
   # config.linkedin.user_info_fields = ['first-name', 'last-name']
   # config.linkedin.user_info_mapping = {first_name: "firstName", last_name: "lastName"}
-  # config.linkedin.access_permissions = ['r_basicprofile'] 
+  # config.linkedin.access_permissions = ['r_basicprofile']
   #
   # Twitter wil not accept any requests nor redirect uri containing localhost,
   # make sure you use 0.0.0.0:3000 to access your app in development
