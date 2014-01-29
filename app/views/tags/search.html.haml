@@ -1,3 +1,9 @@
+- content_for :angular_app do
+  gallery
+
+- content_for :angular_controller do
+  GalleryCtrl
+
 = link_to '&larr; Back to Gallery'.html_safe, tags_path, class: 'button left'
 = form_tag photos_search_path, method: :get do
   .searchContainer.right
@@ -5,9 +11,8 @@
     = search_button
 .clear
 
-%section.photos
-  - @photos.each do |photo|
-    .photo{ style: "height: #{photo.image.height(:thumb)}px" }= image_tag photo.image.url(:thumb)
+%section.photos{ masonry: true }
+  %photos-list{ photos: 'photos' }
   - if @photos.empty?
     %h1.center There are no photos for your search
   .clear
@@ -32,3 +37,9 @@
   });
 
   tagSelectionView.render();
+
+  $(document).ready(function() {
+    EpicImages.AngularDataSeed({
+      photos: #{render partial: 'photos/photos', locals: { photos: @photos }, formats: [:json] }
+    })
+  });

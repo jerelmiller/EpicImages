@@ -10,8 +10,8 @@ class TagsController < ApplicationController
   end
 
   def search
-    @tags = Tag.joins(:photos).all
-    @searched_tags = Tag.where(name: params[:search].split(';'))
+    @tags = Tag.joins(:photos).includes(:photos).all
+    @searched_tags = Tag.where(name: params[:search].split(';')).includes(:photos)
     @photos = @searched_tags.map(&:photos).flatten.uniq
   end
 
