@@ -22,38 +22,14 @@ ul, ol {
   padding: 0;
 }
 
-.left {
-  float: left;
-}
-
-.right {
-  float: right;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-.clear {
-  clear: both;
-}
-
-.center {
-  text-align: center;
-}
-
-.absolute {
-  position: absolute;
-}
-
-.relative {
-  position: relative;
-}
-
-.fullWidth {
-  width: 100%;
-}
-
+.left { float: left; }
+.right { float: right; }
+.bold { font-weight: bold; }
+.clear { clear: both; }
+.center { text-align: center; }
+.absolute { position: absolute; }
+.relative { position: relative; }
+.full-width { width: 100%; }
 .clearfix:after {
   content: ".";
   display: block;
@@ -63,14 +39,6 @@ ul, ol {
   height: 0;
 }
 
-.clearfix {
-  display: inline-block;
-}
-
-html[xmlns] .clearfix {
-  display: block;
-}
-
-* html .clearfix {
-  height: 1%;
-}
+.clearfix { display: inline-block; }
+html[xmlns] .clearfix { display: block; }
+* html .clearfix { height: 1%; }

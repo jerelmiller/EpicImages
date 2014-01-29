@@ -2,6 +2,12 @@
 
 .photos { position: relative; }
 
+.photo-edit-container {
+  float: right;
+  border: 2px solid #555;
+  padding: 5px;
+}
+
 .photo {
   width: 222px;
   margin: 5px;

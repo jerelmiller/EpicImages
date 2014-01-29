@@ -1,5 +1,6 @@
-= form_for [:admin, @photo], html: { multipart: true } do |f|
+= form_for [:admin, @photo], html: { multipart: true, class: 'full-width clearfix' } do |f|
   = render 'layouts/flash', flash: flash
+  .photo-edit-container= image_tag @photo.image.url(:thumb)
   .input
     %label Choose Photo
     = f.file_field :image

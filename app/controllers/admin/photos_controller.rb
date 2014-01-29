@@ -1,5 +1,5 @@
 class Admin::PhotosController < Admin::AdminController
-  before_filter :load_photo, only: [:edit, :update, :destroy, :image]
+  before_filter :load_photo, only: [:update, :destroy, :image]
 
   def index
     @photos = Photo.order('created_at desc')
@@ -30,9 +30,10 @@ class Admin::PhotosController < Admin::AdminController
   end
 
   def edit
-    @tags = Tag.all
+    @photo = Photo.includes{ tags }.find params[:id]
+    @tags = Tag.includes{ photos }.all
     @photo_tags = @photo.tags
-    @galleries = Tag.gallery
+    @galleries = Tag.gallery.includes{ photos }
   end
 
   def update

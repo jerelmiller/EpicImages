@@ -1,6 +1,8 @@
 @import 'colors';
 @import 'mixins';
 
+form { position: relative; }
+
 .searchSubmit {
   background: $blue;
   padding: 10px 15px;
