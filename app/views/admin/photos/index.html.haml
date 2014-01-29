@@ -24,31 +24,31 @@
 = render 'layouts/flash', flash: flash
 .tabbedContainer
   .tabHeader
-    .actions.absolute.photoTabs
+    .actions.absolute{ 'ng-show' => 'tabIsSelected("photos")' }
       = link_to '#photoUpload', class: 'button right', 'data-toggle' => 'modal' do
         %span.icon16.plus
         Add new photos
-    %h1.sectionTitle.photoTabs
+    %h1.sectionTitle{ 'ng-show' => 'tabIsSelected("photos")' }
       %span.glyph.images
       Photos
-    .actions.absolute.galleryTabs.hide
+    .actions.absolute{ 'ng-show' => 'tabIsSelected("galleries")' }
       = link_to '#newGallery', class: 'button right', 'data-toggle' => 'modal' do
         %span.icon16.plus
         Add a gallery
-    %h1.sectionTitle.galleryTabs.hide
+    %h1.sectionTitle{ 'ng-show' => 'tabIsSelected("galleries")' }
       %span.glyph.images
       Galleries
     .tabs
-      = link_to '#', class: 'tab selected', id: 'photosView' do
+      = link_to '', class: 'tab', 'ng-click' => 'switchTab("photos")', 'ng-class' => '{ selected: tabIsSelected("photos") }' do
         Photos
         %span.arrowUp.border
         %span.arrowUp
-      = link_to '#', class: 'tab', id: 'galleriesView' do
+      = link_to '', class: 'tab', 'ng-click' => 'switchTab("galleries")', 'ng-class' => '{ selected: tabIsSelected("galleries") }' do
         %span Galleries
         %span.arrowUp.border
         %span.arrowUp
 
-%section.photos{ masonry: true }
+%section.photos{ masonry: true, 'ng-show' => 'currentTab == "photos"' }
   %h3{ 'ng-hide' => 'photos.length > 0' }
     There are currently no photos.
     = link_to '#photoUpload', 'data-toggle' => 'modal', style: 'margin-left: 40px;' do
@@ -57,7 +57,7 @@
   %spin{ 'spin-on' => 'fetchingPhotos', dim: '.photo' }
   %photos-list{ photos: 'photos' }
   .clear
-%section.galleries.hide
+%section.galleries{ 'ng-show' => 'currentTab == "galleries"' }
   - if @galleries.empty?
     %h1.center No galleries created yet. Go ahead and create one!
 
@@ -91,24 +91,6 @@
   galleriesView.render();
 
   $(document).ready(function() {
-    $('#photosView').click(function(e) {
-      e.preventDefault();
-      $('.tab').removeClass('selected');
-      $(this).addClass('selected');
-      $('.photos, .photoTabs').show()
-      $('.galleries, .galleryTabs').hide()
-    });
-    $('#galleriesView').click(function(e) {
-      e.preventDefault();
-      $('.tab').removeClass('selected');
-      $(this).addClass('selected');
-      $('.photos, .photoTabs').hide();
-      $('.galleries, .galleryTabs').show();
-    });
-    addPhotosView.on('saved', function() {
-      photoListView.refresh();
-    });
-
     EpicImages.AngularDataSeed({
       photos: #{render(partial: 'admin/photos/photos', locals: { photos: @photos }, formats: [:json])}
     })

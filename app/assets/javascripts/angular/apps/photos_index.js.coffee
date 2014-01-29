@@ -7,6 +7,10 @@ angular.module('photosIndex', ['applicationServices', 'applicationDirectives', '
   DataSeed.then (data) ->
     angular.extend $scope, data
 
+  $scope.currentTab = 'photos'
+  $scope.switchTab = (tab) -> $scope.currentTab = tab
+  $scope.tabIsSelected = (tab) -> $scope.currentTab == tab
+
     # angular.forEach $scope.photos, (photo) ->
     #   photo.fetchingImage = true
     #   $timeout ->
